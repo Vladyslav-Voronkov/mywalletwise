@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mywalletwise/static/css/main.cd2de9b0.css",
+    "main.js": "/mywalletwise/static/js/main.ae845102.js",
+    "index.html": "/mywalletwise/index.html",
+    "main.cd2de9b0.css.map": "/mywalletwise/static/css/main.cd2de9b0.css.map",
+    "main.ae845102.js.map": "/mywalletwise/static/js/main.ae845102.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cd2de9b0.css",
+    "static/js/main.ae845102.js"
+  ]
+}
