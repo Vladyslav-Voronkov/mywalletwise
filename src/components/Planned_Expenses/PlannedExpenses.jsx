@@ -10,6 +10,7 @@ const PlannedExpenses = () => {
         balance: 0,
         budget: 1000,
         expCategories: [],
+        target: [],
     }
 
     const calculateBalance = () => {
@@ -107,9 +108,9 @@ const PlannedExpenses = () => {
         if (localStorage.getItem("dynamic_budget") === "true") {
             dynamicBudget();
         }
-        
+
         state.budget = document.getElementById("budget").value;
-        if(state.budget === "") {
+        if (state.budget === "") {
             state.budget = 0;
         }
 
@@ -127,12 +128,32 @@ const PlannedExpenses = () => {
 
     getBudget();
 
+    // when i swipe on expense then show delete button
+    const swipe = () => {
+        // get all expenses
+        const expenses = JSON.parse(localStorage.getItem("expenses"));
+        // if expenses is not defined then set expenses to empty array
+        if (expenses === null || expenses.length === 0) {
+            localStorage.setItem("expenses", JSON.stringify([]));
+            return;
+        }
+        // if expenses is not empty then find this expense in expenses
+        if (expenses.length !== 0) {
+            expenses.map((expense) => {
+                // if expense is found then show delete button
+                document.getElementById("delete_" + expense.id).style.display = "flex";
+            })
+        }
+    }
+
+    
+
     // dynamic budget
     const dynamicBudget = () => {
         // dynamicaly expand budget i need to set budget that be calculated by your daily expenses and set monthly budget
         // for example if you spend 100$ per day then your budget will be 3000$ per month
         // if you spend 50$ per day then your budget will be 1500$ per month
-        
+
         // get all expenses
         const expenses = JSON.parse(localStorage.getItem("expenses"));
         // if expenses is not defined or empty then set budget to 0
@@ -173,15 +194,15 @@ const PlannedExpenses = () => {
         // calculate budget for month and convert to int
         state.budget = parseInt(averageExpenses * 30);
         localStorage.setItem("budget", state.budget);
-        
+
 
     }
-    
+
     // if localstorage dynamic_budget is true then calculate dynamic budget one time per day
     if (localStorage.getItem("dynamic_budget") === "true") {
         dynamicBudget();
     }
-    
+
     const changeCategory = () => {
         // get id name value and set id option value category from localstorage same names
         const name = document.getElementById("name").value;
@@ -208,6 +229,38 @@ const PlannedExpenses = () => {
 
 
     calculateCategoriesSum();
+
+    // Add target
+    const addTarget = () => {
+        const name = document.getElementById("name_target").value;
+        const amount = document.getElementById("amount_target").value;
+
+        const newTarget = {
+            id: state.target.length + 1,
+            name: name,
+            amount: amount,
+        }
+
+        // if amount is null
+        if (amount === "") {
+            newTarget.amount = 0;
+        }
+
+        // save to local storage
+        state.target.push(newTarget);
+        localStorage.setItem("target", JSON.stringify(state.target));
+        document.getElementById("modal_ADD_TARGET").style.display = "none";
+        window.location.reload();
+    }
+
+    // update target
+    const updateTarget = () => {
+        if (localStorage.getItem("target") !== null) {
+            state.target = JSON.parse(localStorage.getItem("target"));
+        }
+    }
+
+    updateTarget(); 
 
     return (
         <div className="overflow-y-hidden pt-24 bg-[#000]">
@@ -246,7 +299,7 @@ const PlannedExpenses = () => {
                             <input placeholder={
                                 new Date().toISOString().slice(0, 10)
                             } id="date" name="date" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="date" />
-                        </div> 
+                        </div>
                         <div className="flex justify-between items-center mt-5">
                             <textarea placeholder="Notes" id="notes" name="notes" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
                         </div>
@@ -272,8 +325,8 @@ const PlannedExpenses = () => {
                         <div className="flex flex-col justify-between items-center">
                             <h1 className="text-xl text-white">Budget</h1>
                             <input
-                                value = { localStorage.getItem("dynamic_budget") === "true" ? state.budget : null}
-                                placeholder={ state.budget }
+                                value={localStorage.getItem("dynamic_budget") === "true" ? state.budget : null}
+                                placeholder={state.budget}
                                 id="budget" name="budget" className="border border-gray-400 w-full mt-2 text-white rounded-md px-3 py-1  text-center text-2xl outline-none bg-transparent" type="text" />
                             {/* checkbox "Dynamic budget" */}
                             <br />
@@ -281,21 +334,21 @@ const PlannedExpenses = () => {
                                 {/* Чекбокс кастомный красивый */}
                                 <div className="flex items-center justify-between">
                                     <input
-                                    
-                                    checked = { localStorage.getItem("dynamic_budget") === "true" ? true : false }
-                                    onChange = { () => {
-                                        if (localStorage.getItem("dynamic_budget") === "true") {
-                                            localStorage.setItem("dynamic_budget", false);
-                                            window.location.reload();
-                                        } else {
-                                            localStorage.setItem("dynamic_budget", true);
-                                            window.location.reload();
+
+                                        checked={localStorage.getItem("dynamic_budget") === "true" ? true : false}
+                                        onChange={() => {
+                                            if (localStorage.getItem("dynamic_budget") === "true") {
+                                                localStorage.setItem("dynamic_budget", false);
+                                                window.location.reload();
+                                            } else {
+                                                localStorage.setItem("dynamic_budget", true);
+                                                window.location.reload();
+                                            }
                                         }
-                                    }
-                                   
-                                }
-                                    className="w-5 h-5 border border-gray-400 rounded-md"  
-                                    type="checkbox" id="dynamic_budget" name="dynamic_budget" value="dynamic_budget" />
+
+                                        }
+                                        className="w-5 h-5 border border-gray-400 rounded-md"
+                                        type="checkbox" id="dynamic_budget" name="dynamic_budget" value="dynamic_budget" />
                                     <label className="ml-2 text-white" htmlFor="dynamic_budget">Dynamic budget</label>
                                 </div>
                                 {/* подсказка при наведении типо функция работает с нейросетью и на ее основе динамически разширяет бюджет */}
@@ -313,6 +366,32 @@ const PlannedExpenses = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Modal add a target */}
+            <div
+                id="modal_ADD_TARGET"
+                className="z-50 hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 justify-center items-center backdrop-blur-md">
+                <div className="bg-[#000] rounded-2xl w-full mx-2 h-2/2">
+                    <div className="flex justify-between items-center px-5 py-3">
+                        <h1 className="text-2xl text-white">Add Target</h1>
+                        <button className="text-2xl text-white" onClick={() => {
+                            document.getElementById("modal_ADD_TARGET").style.display = "none";
+                        }}>X</button>
+                    </div>
+                    <div className="px-5 py-3">
+                        <div className="flex justify-between items-center">
+                            <input placeholder="Name" id="name_target" name="name_target" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                        </div>
+                        <div className="flex justify-between items-center mt-5">
+                            <input placeholder="Amount" id="amount_target" name="amount_target" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                        </div>
+                        <div className="flex justify-center items-center mt-5">
+                            <button onClick={addTarget} className="bg-green-500 w-full rounded-2xl px-5 py-2 text-white">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
             {/* Top panel */}
@@ -343,11 +422,43 @@ const PlannedExpenses = () => {
                 {/* Cards with expenses */}
                 <div className="flex items-center px-5 mt-2 overflow-x-scroll pt-10 pb-5">
                     {/* Add Category */}
-                    <div onClick={openModal} className=" shrink-0 border border-white self-stretch w-14 rounded-full flex justify-center items-center text-white text-4xl">+</div>
+
+                    <div className="self-center fixed z-20 backdrop-blur-md left-0 px-5 py-2 rounded-2xl ml-1">
+                        <div onClick={openModal} className="h-full py-5 shrink-0 border border-white self-stretch w-14 rounded-xl flex justify-center items-center text-white text-4xl active:bg-white">💸</div>
+                        <div onClick={
+                            () => {
+                                document.getElementById("modal_ADD_TARGET").style.display = "flex";
+                            }
+
+                        } className="h-full mt-5 py-5 shrink-0 border border-white self-stretch w-14 rounded-xl flex justify-center items-center text-white text-4xl">🎯</div>
+                    </div>
+
+                    {/* target block */}
+                    <div className="shrink-0 bg-gradient-to-t from-green-500 to-blue-900 w-3/5 drop-shadow-xl p-5 text-white rounded-3xl ml-20 ">
+                        <h1>🎯Target</h1>
+                        {/* Target name */}
+                        <h1 className="mt-2 text-2xl">{
+                            state.target.length === 0 ? "No target" : state.target[0].name
+                        }</h1>
+                        <h1 className="mt-2 text-xl text-green-300 font-bold">{
+                            state.target.length === 0 ? "No target" : state.target[0].amount
+                        }</h1>
+                        {/* When i can buy it date*/}
+                        <div className="mt-2 w-max bg-[#ffffff55] rounded-full px-3 py-1">🕑{
+                            state.target.length === 0 ? "No target" : "04.08.2004"
+                        }</div>
+                        
+                        
+                    </div>
+
                     {/* Categories */}
                     {
                         Object.keys(state.expCategories).map((key) => (
-                            <div className="shrink-0 bg-gradient-to-t from-red-500 to-purple-900 w-2/5 drop-shadow-xl p-5 text-white rounded-3xl ml-5">
+                            <div 
+                            onClick={swipe} 
+                            className="shrink-0 bg-gradient-to-b  
+                            from-blue-900 
+                            w-2/5 drop-shadow-xl p-5 text-white rounded-3xl ml-5 ">
                                 <h1>{key === "Housing" ? "🏠Housing" : ""}
                                     {key === "Food" ? "🍗Food" : ""}
                                     {key === "Saving" ? "💸Saving" : ""}
@@ -385,7 +496,32 @@ const PlannedExpenses = () => {
                             return date.getDate() === today.getDate();
                         }
                         ).reverse().map((expense) => (
-                            <div className="flex justify-between items-center mt-4">
+                            <div
+                            id={expense.id}
+                            className="flex justify-between items-center mt-4">
+                                {/* delete button fixed and show when swipe*/}
+                                <div 
+                                onClick={()=>{
+                                    // delete expense
+                                    const expenses = JSON.parse(localStorage.getItem("expenses"));
+                                    // find this expense in expenses
+                                    expenses.map((expense)=>{
+                                        if(expense.id === expense.id){
+                                            // delete this expense
+                                            expenses.splice(expense.id,1);
+                                            // save to local storage
+                                            localStorage.setItem("expenses",JSON.stringify(expenses));
+                                            window.location.reload();
+                                        }
+                                    })
+                                }}
+
+                                id={
+                                    "delete_"+expense.id
+                                }
+                                
+                                className="absolute hidden flex bg-red-500 rounded-full p-2 ml-10 mb-10 justify-center items-center text-white text-sm active:bg-white">🗑️</div>
+                                
                                 <div className="flex  justify-between items-center">
                                     {expense.category === "Housing" ? <div className="bg-red-800 rounded-full p-5">🏠</div> : null}
                                     {expense.category === "Food" ? <div className="bg-yellow-800 rounded-full p-5">🍗</div> : null}
@@ -417,7 +553,7 @@ const PlannedExpenses = () => {
                             return date.getDate() === today.getDate() - 1;
                         }
                         ).map((expense) => (
-                            <div className="flex justify-between items-center mt-4">
+                            <div className="flex justify-between items-center mt-4" >
                                 <div className="flex  justify-between items-center">
                                     {expense.category === "Housing" ? <div className="bg-red-800 rounded-full p-5">🏠</div> : null}
                                     {expense.category === "Food" ? <div className="bg-yellow-800 rounded-full p-5">🍗</div> : null}
@@ -468,12 +604,15 @@ const PlannedExpenses = () => {
                                 </div>
                                 <div>
                                     <h1 className="text-white text-xl text-right">- {expense.amount}</h1>
-
+                                    
                                 </div>
+                               
                             </div>
+                            
                         ))
+                        
                     }
-
+                    
                 </div>
 
             </div>

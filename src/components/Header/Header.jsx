@@ -19,7 +19,7 @@ const Header = () => {
         name: "Vladyslav Voronkov",
     });
 
-
+ 
     return (
         <header className="bg-[#000] flex justify-between items-center px-2 py-5 fixed w-full ">
             {/* User */}
