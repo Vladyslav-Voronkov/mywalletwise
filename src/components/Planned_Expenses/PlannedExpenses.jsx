@@ -3,6 +3,11 @@ import { ReactDOM } from "react";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+import avatar_1_preview from "../../img/avatar-1-preview.webp"
+import avatar_2_preview from "../../img/avatar-2-preview.webp"
+import avatar_3_preview from "../../img/avatar-3-preview.webp"
+import avatar_4_preview from "../../img/avatar-4-preview.webp"
+import avatar_5_preview from "../../img/avatar-5-preview.webp"
 const PlannedExpenses = () => {
 
     const state = {
@@ -10,8 +15,20 @@ const PlannedExpenses = () => {
         balance: 0,
         budget: 1000,
         expCategories: [],
-        target: [],
+        targetName: "",
+        targetAmount: 0,
+        avatar_name: "avatar_1",
     }
+
+    // load avatar from local storage
+    const loadAvatar = () => {
+        if (localStorage.getItem("avatar_name") !== null) {
+            state.avatar_name = localStorage.getItem("avatar_name");
+        }
+    }
+    loadAvatar();
+
+
 
     const calculateBalance = () => {
         let total = 0;
@@ -24,7 +41,11 @@ const PlannedExpenses = () => {
     }
 
     const openModal = () => {
-        document.getElementById("modal_ADD_EXPENSE").style.display = "flex";
+        // document.getElementById("modal_ADD_EXPENSE").style.display = "flex";
+        document.getElementById("modal_ADD_EXPENSE").style.transform = "translateX(0rem)";
+        document.getElementById("modal_ADD_EXPENSE").style.opacity = "1";
+        document.getElementById("modal_ADD_EXPENSE").style.transition = "all 0.5s ease";
+
     };
 
     const addExpense = () => {
@@ -146,7 +167,7 @@ const PlannedExpenses = () => {
         }
     }
 
-    
+
 
     // dynamic budget
     const dynamicBudget = () => {
@@ -207,7 +228,44 @@ const PlannedExpenses = () => {
         // get id name value and set id option value category from localstorage same names
         const name = document.getElementById("name").value;
         const category = document.getElementById("category");
+        // set name to preview
+        document.getElementById("preview_name").innerHTML = name;
+        // change icon and category preview
+        if (category.value === "Housing") {
+            document.getElementById("preview_category").innerHTML = "Housing";
+            document.getElementById("preview_category_icon").innerHTML = "🏠";
+        }
+        if (category.value === "Food") {
+            document.getElementById("preview_category").innerHTML = "Food";
+            document.getElementById("preview_category_icon").innerHTML = "🍗";
+        }
+        if (category.value === "Saving") {
+            document.getElementById("preview_category").innerHTML = "Saving";
+            document.getElementById("preview_category_icon").innerHTML = "💸";
+        }
+        if (category.value === "Transport") {
+            document.getElementById("preview_category").innerHTML = "Transport";
+            document.getElementById("preview_category_icon").innerHTML = "🚗";
+        }
+        if (category.value === "Clothing") {
+            document.getElementById("preview_category").innerHTML = "Clothing";
+            document.getElementById("preview_category_icon").innerHTML = "👕";
+        }
+        if (category.value === "Health") {
+            document.getElementById("preview_category").innerHTML = "Health";
+            document.getElementById("preview_category_icon").innerHTML = "🏥";
+        }
+        if (category.value === "Entertainment") {
+            document.getElementById("preview_category").innerHTML = "Entertainment";
+            document.getElementById("preview_category_icon").innerHTML = "🎮";
+        }
+        if (category.value === "Other") {
+            document.getElementById("preview_category").innerHTML = "Other";
+            document.getElementById("preview_category_icon").innerHTML = "📦";
+        }
+
         // find this name in localstorage
+
         const categories = JSON.parse(localStorage.getItem("expenses"));
         // if categories is not defined then set categories to empty array
         if (categories === null || categories.length === 0 || categories === undefined) {
@@ -235,56 +293,123 @@ const PlannedExpenses = () => {
         const name = document.getElementById("name_target").value;
         const amount = document.getElementById("amount_target").value;
 
-        const newTarget = {
-            id: state.target.length + 1,
-            name: name,
-            amount: amount,
-        }
-
-        // if amount is null
-        if (amount === "") {
-            newTarget.amount = 0;
-        }
-
-        // save to local storage
-        state.target.push(newTarget);
-        localStorage.setItem("target", JSON.stringify(state.target));
+        // set target name to local storage
+        localStorage.setItem("targetName", name);
+        localStorage.setItem("targetAmount", amount);
         document.getElementById("modal_ADD_TARGET").style.display = "none";
         window.location.reload();
     }
 
     // update target
     const updateTarget = () => {
-        if (localStorage.getItem("target") !== null) {
-            state.target = JSON.parse(localStorage.getItem("target"));
+        if (localStorage.getItem("targetName") !== "") {
+            state.targetName = localStorage.getItem("targetName");
+            state.targetAmount = localStorage.getItem("targetAmount");
         }
     }
 
-    updateTarget(); 
+    updateTarget();
 
     return (
-        <div className="overflow-y-hidden pt-24 bg-[#000]">
-
+        <div id="top" className="overflow-y-hidden pt-24 bg-[#1a1a1a] bg-opacity-0">
+            <div id="top"></div>
             {/* modal window adding a expense */}
             <div
                 id="modal_ADD_EXPENSE"
-                className="z-50 hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 justify-center items-center backdrop-blur-md">
-                <div className="bg-[#000] rounded-2xl w-full mx-2 h-2/2">
+                className="z-50 -translate-x-96 fixed top-0 left-0 w-3/3 h-full justify-center items-center">
+                <div className="bg-[#111] bg-opacity-50 translate-y-10 backdrop-blur-md rounded-2xl w-full mx-2 h-2/2">
+
                     <div className="flex justify-between items-center px-5 py-3">
+
                         <h1 className="text-2xl text-white">Add Expense</h1>
+
+
                         <button className="text-2xl text-white" onClick={() => {
-                            document.getElementById("modal_ADD_EXPENSE").style.display = "none";
+                            // document.getElementById("modal_ADD_EXPENSE").style.display = "none";
+                            document.getElementById("modal_ADD_EXPENSE").style.transform = "translateX(-96rem)";
+                            document.getElementById("modal_ADD_EXPENSE").style.opacity = "0";
+                            document.getElementById("modal_ADD_EXPENSE").style.transition = "all 0.9s ease";
                         }}>X</button>
                     </div>
+
+                    {/* Preview block */}
+                    <h1 className="text-white text-xl px-5 pb-2">Preview</h1>
+                    <div className="flex justify-between items-center mx-5 px-2 rounded-md  border-white border py-2">
+                        <div className="flex justify-between items-center">
+                            <div id="preview_category_icon" className="bg-red-800 rounded-full p-5">🏠</div>
+                            <div className="ml-3">
+                                <h1
+                                    id="preview_name"
+                                    className="text-white text-lg">Name</h1>
+                                <h1
+                                    id="preview_category"
+                                    className="text-gray-400 text-sm">Housing</h1>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 id="preview_amount" className="text-white text-xl text-right">- 0</h1>
+                        </div>
+                    </div>
+
                     <div className="px-5 py-3">
                         <div className="flex justify-between items-center">
-                            <input onChange={changeCategory} placeholder="Name" id="name" name="name" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                            <input onChange={changeCategory
+
+                            } placeholder="Name" id="name" name="name" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
                         </div>
                         <div className="flex justify-between items-center mt-5">
-                            <input placeholder="Amount" id="amount" name="amount" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                            <input onChange={
+                                // preview amount
+                                () => {
+                                    const amount = document.getElementById("amount").value;
+                                    document.getElementById("preview_amount").innerHTML = `- ${amount}`;
+                                }
+
+
+                            } placeholder="Amount" id="amount" name="amount" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
                         </div>
                         <div className="flex justify-between items-center mt-5">
-                            <select id="category" name="category" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent">
+                            <select onChange={
+                                // preview category
+                                () => {
+                                    const category = document.getElementById("category").value;
+                                    document.getElementById("preview_category").innerHTML = category;
+                                    // set preview category
+                                    if (category === "Housing") {
+                                        document.getElementById("preview_category").innerHTML = "Housing";
+                                        document.getElementById("preview_category_icon").innerHTML = "🏠";
+                                    }
+                                    if (category === "Food") {
+                                        document.getElementById("preview_category").innerHTML = "Food";
+                                        document.getElementById("preview_category_icon").innerHTML = "🍗";
+                                    }
+                                    if (category === "Saving") {
+                                        document.getElementById("preview_category").innerHTML = "Saving";
+                                        document.getElementById("preview_category_icon").innerHTML = "💸";
+                                    }
+                                    if (category === "Transport") {
+                                        document.getElementById("preview_category").innerHTML = "Transport";
+                                        document.getElementById("preview_category_icon").innerHTML = "🚗";
+                                    }
+                                    if (category === "Clothing") {
+                                        document.getElementById("preview_category").innerHTML = "Clothing";
+                                        document.getElementById("preview_category_icon").innerHTML = "👕";
+                                    }
+                                    if (category === "Health") {
+                                        document.getElementById("preview_category").innerHTML = "Health";
+                                        document.getElementById("preview_category_icon").innerHTML = "🏥";
+                                    }
+                                    if (category === "Entertainment") {
+                                        document.getElementById("preview_category").innerHTML = "Entertainment";
+                                        document.getElementById("preview_category_icon").innerHTML = "🎮";
+                                    }
+                                    if (category === "Other") {
+                                        document.getElementById("preview_category").innerHTML = "Other";
+                                        document.getElementById("preview_category_icon").innerHTML = "📦";
+                                    }
+                                }
+
+                            } id="category" name="category" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent">
                                 <option value="Housing">🏠Housing</option>
                                 <option value="Food">🍗Food</option>
                                 <option value="Saving">💸Saving</option>
@@ -370,20 +495,24 @@ const PlannedExpenses = () => {
             {/* Modal add a target */}
             <div
                 id="modal_ADD_TARGET"
-                className="z-50 hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 justify-center items-center backdrop-blur-md">
-                <div className="bg-[#000] rounded-2xl w-full mx-2 h-2/2">
+                className="z-50 -translate-x-96 fixed top-0 left-0 w-3/3  h-full justify-center items-center">
+                <div className="bg-[#000] bg-opacity-50 backdrop-blur-md translate-y-52 rounded-2xl w-full mx-2 h-2/2">
                     <div className="flex justify-between items-center px-5 py-3">
                         <h1 className="text-2xl text-white">Add Target</h1>
                         <button className="text-2xl text-white" onClick={() => {
-                            document.getElementById("modal_ADD_TARGET").style.display = "none";
+                            document.getElementById("modal_ADD_TARGET").style.transform = "translateX(-96rem)";
                         }}>X</button>
                     </div>
                     <div className="px-5 py-3">
                         <div className="flex justify-between items-center">
-                            <input placeholder="Name" id="name_target" name="name_target" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                            <input placeholder={
+                                state.targetName === "" ? "Name" : state.targetName
+                            } id="name_target" name="name_target" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
                         </div>
                         <div className="flex justify-between items-center mt-5">
-                            <input placeholder="Amount" id="amount_target" name="amount_target" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                            <input placeholder={
+                                state.targetAmount === "" ? "Amount" : state.targetAmount
+                            } id="amount_target" name="amount_target" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
                         </div>
                         <div className="flex justify-center items-center mt-5">
                             <button onClick={addTarget} className="bg-green-500 w-full rounded-2xl px-5 py-2 text-white">Add</button>
@@ -392,10 +521,123 @@ const PlannedExpenses = () => {
                 </div>
             </div>
 
+            {/* Modal account settings */}
+            <div
+                id="modal_ACCOUNT_SETTINGS"
+                className="duration-500 -translate-y-[96rem] z-50 fixed top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center ">
+                <div className="bg-[#000] bg-opacity-50 rounded-2xl backdrop-blur-md mx-2 w-full h-2/2">
+                    <div className="flex justify-between items-center px-5 py-3">
+                        <h1 className="text-2xl text-white">Account Settings</h1>
+                        <button className="text-2xl text-white" onClick={() => {
+                            document.getElementById("account_settings").style.display = "flex";
+                            document.getElementById("avatar_selector").style.display = "none";
+                            document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-96rem)";
+                            document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "0";
+                            document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.9s ease";
+                            // document.getElementById("modal_ACCOUNT_SETTINGS").style.display = "none";
+                            // translate x 
+                        }}>X</button>
+
+                    </div>
+                    <div id="account_settings" className="px-5 py-3 flex justify-between items-center w-full">
+                        <div className="
+                         flex flex-col justify-center items-center
+                       ">
+
+                            {/* <img width={100} src={avatar_1_preview}  alt="Avatar" /> */}
+                            {
+                                // load avatar from local storage
+                                state.avatar_name === "avatar_1" ? <img width={120} src={avatar_1_preview} alt="Avatar" /> : null
+
+                            }
+                            {state.avatar_name === "avatar_2" ? <img width={120} src={avatar_2_preview} alt="Avatar" /> : null}
+                            {state.avatar_name === "avatar_3" ? <img width={120} src={avatar_3_preview} alt="Avatar" /> : null}
+                            {state.avatar_name === "avatar_4" ? <img width={120} src={avatar_4_preview} alt="Avatar" /> : null}
+                            {state.avatar_name === "avatar_5" ? <img width={120} src={avatar_5_preview} alt="Avatar" /> : null}
+                        </div>
+                        {/* change circle buttons */}
+                        <div className="flex justify-center items-center mt-5 ml-2">
+                            <div className="text-white flex flex-col items-center">
+                                <button
+                                    onClick={
+                                        () => {
+                                            document.getElementById("avatar_selector").style.display = "flex";
+                                          
+                                            document.getElementById("account_settings").style.display = "none";
+                                            document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-19rem)";
+                                        }
+                                    }
+                                    className="bg-gradient-to-t from-red-500 to-yellow-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl active:bg-white">🙋‍♂️</button>
+                                Avatar
+                            </div>
+                            <div className="text-white flex flex-col items-center ml-5">
+                                <button className="bg-gradient-to-t from-green-500 to-blue-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl">🖌️</button>
+                                Username
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="avatar_selector" className="hidden flex justify-between items-center mt-2  shrink w-2/2 overflow-x-scroll">
+                        <img onClick={
+                            () => {
+                                document.getElementById("avatar_selector").style.display = "none";
+                                document.getElementById("account_settings").style.display = "flex";
+                                localStorage.setItem("avatar_name", "avatar_1");
+                                window.location.reload();
+                            }
+                        } src={avatar_1_preview} width={100} alt="" />
+                        <img
+                            onClick={
+                                () => {
+                                    document.getElementById("avatar_selector").style.display = "none";
+                                    document.getElementById("account_settings").style.display = "flex";
+                                    localStorage.setItem("avatar_name", "avatar_2");
+                                    window.location.reload();
+                                }
+                            }
+                            src={avatar_2_preview} width={100} alt="" />
+                        <img
+                            onClick={
+                                () => {
+                                    document.getElementById("avatar_selector").style.display = "none";
+                                    document.getElementById("account_settings").style.display = "flex";
+                                    localStorage.setItem("avatar_name", "avatar_3");
+                                    window.location.reload();
+                                }
+                            }
+                            src={avatar_3_preview} width={100} alt="" />
+
+                        <img
+                            onClick={
+                                () => {
+                                    document.getElementById("avatar_selector").style.display = "none";
+                                    document.getElementById("account_settings").style.display = "flex";
+                                    localStorage.setItem("avatar_name", "avatar_4");
+                                    window.location.reload();
+                                }
+                            }
+                            src={avatar_4_preview} width={100} alt="" />
+                        <img
+                            onClick={
+                                () => {
+                                    document.getElementById("avatar_selector").style.display = "none";
+                                    document.getElementById("account_settings").style.display = "flex";
+                                    localStorage.setItem("avatar_name", "avatar_5");
+                                    window.location.reload();
+                                }
+                            }
+                            src={avatar_5_preview} width={100} alt="" />
+
+
+                    </div>
+                </div>
+
+
+            </div>
 
 
             {/* Top panel */}
-            <div className="fixed w-full bg-[#000]">
+            <div id="top" className="fixed w-full bg-[#1a1a1a] bg-opacity-0">
                 {/* Expenses and chart */}
                 <div className="mx-5 flex  justify-between items-center">
                     <div>
@@ -424,40 +666,45 @@ const PlannedExpenses = () => {
                     {/* Add Category */}
 
                     <div className="self-center fixed z-20 backdrop-blur-md left-0 px-5 py-2 rounded-2xl ml-1">
-                        <div onClick={openModal} className="h-full py-5 shrink-0 border border-white self-stretch w-14 rounded-xl flex justify-center items-center text-white text-4xl active:bg-white">💸</div>
+                        <div onClick={openModal} className="h-full py-5 shrink-0 
+                        bg-gradient-to-t from-red-500 to-yellow-900 
+                       self-stretch w-14 rounded-xl flex justify-center items-center text-white text-4xl active:bg-white">💸</div>
                         <div onClick={
                             () => {
-                                document.getElementById("modal_ADD_TARGET").style.display = "flex";
+                                document.getElementById("modal_ADD_TARGET").style.transform = "translateX(0rem)";
+                                // duration
+                                document.getElementById("modal_ADD_TARGET").style.transition = "all 0.5s ease";
                             }
 
-                        } className="h-full mt-5 py-5 shrink-0 border border-white self-stretch w-14 rounded-xl flex justify-center items-center text-white text-4xl">🎯</div>
+                        } className="
+                        bg-gradient-to-t from-green-500 to-blue-900 w-14
+                        h-full mt-5 py-5 shrink-0 self-stretch rounded-xl flex justify-center items-center text-white text-4xl">🎯</div>
                     </div>
 
                     {/* target block */}
-                    <div className="shrink-0 bg-gradient-to-t from-green-500 to-blue-900 w-3/5 drop-shadow-xl p-5 text-white rounded-3xl ml-20 ">
+                    <div className="shrink-0 bg-black bg-opacity-30 border border-white backdrop-blur-md w-3/5 drop-shadow-xl p-5 text-white rounded-3xl ml-20 ">
                         <h1>🎯Target</h1>
                         {/* Target name */}
                         <h1 className="mt-2 text-2xl">{
-                            state.target.length === 0 ? "No target" : state.target[0].name
+                            state.targetName === "" ? "No target" : state.targetName
                         }</h1>
                         <h1 className="mt-2 text-xl text-green-300 font-bold">{
-                            state.target.length === 0 ? "No target" : state.target[0].amount
+                            state.targetName === "" ? "No target" : state.targetAmount
                         }</h1>
                         {/* When i can buy it date*/}
                         <div className="mt-2 w-max bg-[#ffffff55] rounded-full px-3 py-1">🕑{
-                            state.target.length === 0 ? "No target" : "04.08.2004"
+                            state.targetName === "" ? "No target" : "04.08.2023"
                         }</div>
-                        
-                        
+
+
                     </div>
 
                     {/* Categories */}
                     {
                         Object.keys(state.expCategories).map((key) => (
-                            <div 
-                            onClick={swipe} 
-                            className="shrink-0 bg-gradient-to-b  
-                            from-blue-900 
+                            <div
+                                className="shrink-0 bg-gradient-to-b  
+                            from-red-500 to-yellow-900
                             w-2/5 drop-shadow-xl p-5 text-white rounded-3xl ml-5 ">
                                 <h1>{key === "Housing" ? "🏠Housing" : ""}
                                     {key === "Food" ? "🍗Food" : ""}
@@ -475,16 +722,14 @@ const PlannedExpenses = () => {
 
                     }
                 </div>
-                <h1 className="text-white text-2xl px-5 pb-2 ">Spending this month</h1>
+                {/* <h1 className="text-white text-2xl px-5 pb-2 ">Spending this month</h1> */}
             </div>
 
             {/* Spending this month */}
-            <div className="mx-5 my-10  mt-96 
+            <div className="my-10 pb-20 mt-[410px] pt-5 backdrop-blur-sm  w-full px-5 overflow-x-hidden bg-black bg-opacity-80 z-40 absolute
              ">
-                <div>
-
-                </div>
-                <div className="overflow-y-scroll">
+                <a href="#top"><div className="w-32 h-1 rounded-full mt-2 bg-white m-auto absolute left-0 top-0 ml-32"></div></a>
+                <div className="overflow-y-scroll overflow-x-hidden">
                     {/* Today expenses */}
                     <h1 className="text-white text-xl">Today</h1>
                     {/* sort by date "TODAY" */}
@@ -497,31 +742,31 @@ const PlannedExpenses = () => {
                         }
                         ).reverse().map((expense) => (
                             <div
-                            id={expense.id}
-                            className="flex justify-between items-center mt-4">
+                                id={expense.id}
+                                className="flex justify-between items-center mt-4">
                                 {/* delete button fixed and show when swipe*/}
-                                <div 
-                                onClick={()=>{
-                                    // delete expense
-                                    const expenses = JSON.parse(localStorage.getItem("expenses"));
-                                    // find this expense in expenses
-                                    expenses.map((expense)=>{
-                                        if(expense.id === expense.id){
-                                            // delete this expense
-                                            expenses.splice(expense.id,1);
-                                            // save to local storage
-                                            localStorage.setItem("expenses",JSON.stringify(expenses));
-                                            window.location.reload();
-                                        }
-                                    })
-                                }}
+                                <div
+                                    onClick={() => {
+                                        // delete expense
+                                        const expenses = JSON.parse(localStorage.getItem("expenses"));
+                                        // find this expense in expenses
+                                        expenses.map((expense) => {
+                                            if (expense.id === expense.id) {
+                                                // delete this expense
+                                                expenses.splice(expense.id, 1);
+                                                // save to local storage
+                                                localStorage.setItem("expenses", JSON.stringify(expenses));
+                                                window.location.reload();
+                                            }
+                                        })
+                                    }}
 
-                                id={
-                                    "delete_"+expense.id
-                                }
-                                
-                                className="absolute hidden flex bg-red-500 rounded-full p-2 ml-10 mb-10 justify-center items-center text-white text-sm active:bg-white">🗑️</div>
-                                
+                                    id={
+                                        "delete_" + expense.id
+                                    }
+
+                                    className="absolute hidden bg-red-500 rounded-full p-2 ml-10 mb-10 justify-center items-center text-white text-sm active:bg-white">🗑️</div>
+
                                 <div className="flex  justify-between items-center">
                                     {expense.category === "Housing" ? <div className="bg-red-800 rounded-full p-5">🏠</div> : null}
                                     {expense.category === "Food" ? <div className="bg-yellow-800 rounded-full p-5">🍗</div> : null}
@@ -604,15 +849,15 @@ const PlannedExpenses = () => {
                                 </div>
                                 <div>
                                     <h1 className="text-white text-xl text-right">- {expense.amount}</h1>
-                                    
+
                                 </div>
-                               
+
                             </div>
-                            
+
                         ))
-                        
+
                     }
-                    
+
                 </div>
 
             </div>
