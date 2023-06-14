@@ -1,14 +1,24 @@
 {
   "files": {
-    "main.css": "/mywalletwise/static/css/main.d8a4e6f4.css",
-    "main.js": "/mywalletwise/static/js/main.fa70e71a.js",
+    "main.css": "/mywalletwise/static/css/main.a3550628.css",
+    "main.js": "/mywalletwise/static/js/main.cfb3eef6.js",
+    "static/media/avatar-3.webp": "/mywalletwise/static/media/avatar-3.edb284be5661c46b91c9.webp",
+    "static/media/avatar-1-preview.webp": "/mywalletwise/static/media/avatar-1-preview.9f62aa74a41162b1c01a.webp",
+    "static/media/avatar-3-preview.webp": "/mywalletwise/static/media/avatar-3-preview.fda7f41ba92930e4aab8.webp",
+    "static/media/avatar-1.webp": "/mywalletwise/static/media/avatar-1.bcc6841827adfe1efa97.webp",
+    "static/media/avatar-5-preview.webp": "/mywalletwise/static/media/avatar-5-preview.631cbea468cac5f91790.webp",
+    "static/media/avatar-4-preview.webp": "/mywalletwise/static/media/avatar-4-preview.594fc7a1864beb047e91.webp",
+    "static/media/avatar-2.webp": "/mywalletwise/static/media/avatar-2.fb403cebb7206e97bcd9.webp",
+    "static/media/avatar-5.webp": "/mywalletwise/static/media/avatar-5.95feff3836ac535de0ca.webp",
+    "static/media/avatar-2-preview.webp": "/mywalletwise/static/media/avatar-2-preview.d9cf480841fc80aadb20.webp",
+    "static/media/avatar-4.webp": "/mywalletwise/static/media/avatar-4.88860dcbb8c770f13c47.webp",
     "static/media/avatar-default-icon.png": "/mywalletwise/static/media/avatar-default-icon.867978d9a80136f33711.png",
     "index.html": "/mywalletwise/index.html",
-    "main.d8a4e6f4.css.map": "/mywalletwise/static/css/main.d8a4e6f4.css.map",
-    "main.fa70e71a.js.map": "/mywalletwise/static/js/main.fa70e71a.js.map"
+    "main.a3550628.css.map": "/mywalletwise/static/css/main.a3550628.css.map",
+    "main.cfb3eef6.js.map": "/mywalletwise/static/js/main.cfb3eef6.js.map"
   },
   "entrypoints": [
-    "static/css/main.d8a4e6f4.css",
-    "static/js/main.fa70e71a.js"
+    "static/css/main.a3550628.css",
+    "static/js/main.cfb3eef6.js"
   ]
 }
