@@ -6,3 +6,43 @@
 *{
     scroll-behavior: smooth;
 }
+
+::-webkit-scrollbar{
+    width: 0rem;
+}
+
+
+::-webkit-scrollbar-track{
+    background: #4c3067;
+} 
+
+::-webkit-scrollbar-thumb{
+    background-color: #4d5fae;
+    border-radius: 1rem;
+}
+
+body {
+      /* background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg.jpg'); */
+  /* background purple gradient - */
+  background: linear-gradient(135deg, #4d5fae 0%, #4c3067 50%);
+  /* animated bg */
+    background-size: 140% 140%;
+    /* animation: gradient 15s ease infinite; */
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

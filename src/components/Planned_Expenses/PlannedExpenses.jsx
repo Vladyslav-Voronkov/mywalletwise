@@ -8,6 +8,9 @@ import avatar_2_preview from "../../img/avatar-2-preview.webp"
 import avatar_3_preview from "../../img/avatar-3-preview.webp"
 import avatar_4_preview from "../../img/avatar-4-preview.webp"
 import avatar_5_preview from "../../img/avatar-5-preview.webp"
+
+import logo from "../../img/logo.png"
+
 const PlannedExpenses = () => {
 
     const state = {
@@ -27,6 +30,11 @@ const PlannedExpenses = () => {
         }
     }
     loadAvatar();
+
+    // when page is loaded then close preloader react
+    React.useEffect(() => {
+        document.getElementById("preloader").style.display = "none";
+    }, [])
 
 
 
@@ -149,32 +157,8 @@ const PlannedExpenses = () => {
 
     getBudget();
 
-    // when i swipe on expense then show delete button
-    const swipe = () => {
-        // get all expenses
-        const expenses = JSON.parse(localStorage.getItem("expenses"));
-        // if expenses is not defined then set expenses to empty array
-        if (expenses === null || expenses.length === 0) {
-            localStorage.setItem("expenses", JSON.stringify([]));
-            return;
-        }
-        // if expenses is not empty then find this expense in expenses
-        if (expenses.length !== 0) {
-            expenses.map((expense) => {
-                // if expense is found then show delete button
-                document.getElementById("delete_" + expense.id).style.display = "flex";
-            })
-        }
-    }
-
-
-
     // dynamic budget
     const dynamicBudget = () => {
-        // dynamicaly expand budget i need to set budget that be calculated by your daily expenses and set monthly budget
-        // for example if you spend 100$ per day then your budget will be 3000$ per month
-        // if you spend 50$ per day then your budget will be 1500$ per month
-
         // get all expenses
         const expenses = JSON.parse(localStorage.getItem("expenses"));
         // if expenses is not defined or empty then set budget to 0
@@ -313,11 +297,17 @@ const PlannedExpenses = () => {
     return (
         <div id="top" className="overflow-y-hidden pt-24 bg-[#1a1a1a] bg-opacity-0">
             <div id="top"></div>
+
+            {/* preloader */}
+            <div id="preloader" className="fixed  top-0 left-0 bg-[#1D1D1D] bg-opacity-50 backdrop-blur-md z-50 w-full h-screen flex justify-center items-center">
+                <img width={200} src={logo} alt="" />
+            </div>
+
             {/* modal window adding a expense */}
             <div
                 id="modal_ADD_EXPENSE"
-                className="z-50 -translate-x-96 fixed top-0 left-0 w-3/3 h-full justify-center items-center">
-                <div className="bg-[#111] bg-opacity-50 translate-y-10 backdrop-blur-md rounded-2xl w-full mx-2 h-2/2">
+                className="z-50 -translate-x-[96rem] fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 backdrop-blur-xl justify-center items-center">
+                <div className="bg-[#111] bg-opacity-50 translate-y-10 backdrop-blur-md rounded-2xl w-3/3 mx-2 h-2/2">
 
                     <div className="flex justify-between items-center px-5 py-3">
 
@@ -438,7 +428,7 @@ const PlannedExpenses = () => {
             {/* modal window with setting budget for the month */}
             <div
                 id="modal_SET_BUDGET"
-                className="z-50 hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 justify-center items-center backdrop-blur-md">
+                className="z-50 hidden fixed top-0 left-0 w-full h-full bg-black  bg-opacity-50 justify-center items-center backdrop-blur-md">
                 <div className="bg-[#000] rounded-2xl w-2/2 h-2/2">
                     <div className="flex justify-between items-center px-5 py-3">
                         <h1 className="text-2xl text-white">Set Budget</h1>
@@ -498,7 +488,7 @@ const PlannedExpenses = () => {
                 className="z-50 -translate-x-96 fixed top-0 left-0 w-3/3  h-full justify-center items-center">
                 <div className="bg-[#000] bg-opacity-50 backdrop-blur-md translate-y-52 rounded-2xl w-full mx-2 h-2/2">
                     <div className="flex justify-between items-center px-5 py-3">
-                        <h1 className="text-2xl text-white">Add Target</h1>
+                        <h1 className="text-2xl text-white">Edit Target</h1>
                         <button className="text-2xl text-white" onClick={() => {
                             document.getElementById("modal_ADD_TARGET").style.transform = "translateX(-96rem)";
                         }}>X</button>
@@ -524,7 +514,7 @@ const PlannedExpenses = () => {
             {/* Modal account settings */}
             <div
                 id="modal_ACCOUNT_SETTINGS"
-                className="duration-500 -translate-y-[96rem] z-50 fixed top-0 left-0 w-full h-full bg-opacity-50 flex justify-center items-center ">
+                className="duration-500 -translate-y-[96rem] z-50 fixed top-0 left-0 w-full h-full md:w-1/3 bg-opacity-50 flex justify-center items-center ">
                 <div className="bg-[#000] bg-opacity-50 rounded-2xl backdrop-blur-md mx-2 w-full h-2/2">
                     <div className="flex justify-between items-center px-5 py-3">
                         <h1 className="text-2xl text-white">Account Settings</h1>
@@ -561,10 +551,10 @@ const PlannedExpenses = () => {
                                 <button
                                     onClick={
                                         () => {
+                                            document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-14rem)";
                                             document.getElementById("avatar_selector").style.display = "flex";
-                                          
+
                                             document.getElementById("account_settings").style.display = "none";
-                                            document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-19rem)";
                                         }
                                     }
                                     className="bg-gradient-to-t from-red-500 to-yellow-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl active:bg-white">🙋‍♂️</button>
@@ -577,16 +567,19 @@ const PlannedExpenses = () => {
                         </div>
 
                     </div>
-                    <div id="avatar_selector" className="hidden flex justify-between items-center mt-2  shrink w-2/2 overflow-x-scroll">
-                        <img onClick={
-                            () => {
-                                document.getElementById("avatar_selector").style.display = "none";
-                                document.getElementById("account_settings").style.display = "flex";
-                                localStorage.setItem("avatar_name", "avatar_1");
-                                window.location.reload();
-                            }
-                        } src={avatar_1_preview} width={100} alt="" />
+                    <div id="avatar_selector" className="hidden flex justify-between items-center mt-2  shrink  md:overflow-x-hidden overflow-y-hidden w-2/2 overflow-x-scroll md:m-auto">
                         <img
+                            className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out overflow-x-hidden"
+                            onClick={
+                                () => {
+                                    document.getElementById("avatar_selector").style.display = "none";
+                                    document.getElementById("account_settings").style.display = "flex";
+                                    localStorage.setItem("avatar_name", "avatar_1");
+                                    window.location.reload();
+                                }
+                            } src={avatar_1_preview} width={100} alt="" />
+                        <img
+                            className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out overflow-x-hidden"
                             onClick={
                                 () => {
                                     document.getElementById("avatar_selector").style.display = "none";
@@ -597,6 +590,7 @@ const PlannedExpenses = () => {
                             }
                             src={avatar_2_preview} width={100} alt="" />
                         <img
+                            className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out overflow-x-hidden"
                             onClick={
                                 () => {
                                     document.getElementById("avatar_selector").style.display = "none";
@@ -608,6 +602,7 @@ const PlannedExpenses = () => {
                             src={avatar_3_preview} width={100} alt="" />
 
                         <img
+                            className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out overflow-x-hidden"
                             onClick={
                                 () => {
                                     document.getElementById("avatar_selector").style.display = "none";
@@ -618,6 +613,7 @@ const PlannedExpenses = () => {
                             }
                             src={avatar_4_preview} width={100} alt="" />
                         <img
+                            className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out overflow-x-hidden"
                             onClick={
                                 () => {
                                     document.getElementById("avatar_selector").style.display = "none";
@@ -637,9 +633,9 @@ const PlannedExpenses = () => {
 
 
             {/* Top panel */}
-            <div id="top" className="fixed w-full bg-[#1a1a1a] bg-opacity-0">
+            <div id="top" className="fixed w-full md:w-3/3 md:m-auto bg-[#1a1a1a] bg-opacity-0 md:static">
                 {/* Expenses and chart */}
-                <div className="mx-5 flex  justify-between items-center">
+                <div className="mx-5 flex justify-between md:mx-20 items-center">
                     <div>
                         <span className="text-gray-400">Planned Expenses</span>
                         <h1 className="text-4xl mt-3 text-white">{state.balance}</h1>
@@ -652,72 +648,136 @@ const PlannedExpenses = () => {
                     </div>
 
                     {/* Pie chart */}
-                    {/* <div className=" border-15 border-green-500 rounded-full w-32 h-32 flex justify-center items-center text-2xl text-white">100%</div> */}
-                    <CircularProgressbar className="w-32 ml-20 text-white" value={
-                        state.balance / state.budget * 100 > 100 ? 100 : state.balance / state.budget * 100
-                    } text={`${state.balance / state.budget * 100 > 100 ? 100 : (state.balance / state.budget * 100).toFixed()
-                        }%`}
+                    <div>
+                        <CircularProgressbar className="w-32 md:w-42 text-white" value={
+                            state.balance / state.budget * 100 > 100 ? 100 : state.balance / state.budget * 100
+                        } text={`${state.balance / state.budget * 100 > 100 ? 100 : (state.balance / state.budget * 100).toFixed()
+                            }%`}
+                            styles={{
+                                root: {},
+                                path: {
+                                    transition: 'stroke-dashoffset 0.5s ease 0s',
+                                    transformOrigin: 'center center',
+                                    stroke: '#4976CDaa',
+                                },
+                                trail: {
+                                    stroke: '#ffffff00',
+                                    strokeLinecap: 'butt',
 
-                    />;
+                                },
+                                text: {
+                                    fill: '#fff',
+                                    fontSize: '25px',
+                                },
+                                background: {
+                                    fill: '#ffffff00',
+                                },
+                            }}
+                        />
+                    </div>
                 </div>
 
                 {/* Cards with expenses */}
-                <div className="flex items-center px-5 mt-2 overflow-x-scroll pt-10 pb-5">
+                <div className="flex items-center md:justify-center px-5 overflow-x-scroll md:overflow-x-hidden pt-10 pb-5 md:flex-wrap m-auto ">
                     {/* Add Category */}
 
-                    <div className="self-center fixed z-20 backdrop-blur-md left-0 px-5 py-2 rounded-2xl ml-1">
-                        <div onClick={openModal} className="h-full py-5 shrink-0 
-                        bg-gradient-to-t from-red-500 to-yellow-900 
-                       self-stretch w-14 rounded-xl flex justify-center items-center text-white text-4xl active:bg-white">💸</div>
-                        <div onClick={
-                            () => {
-                                document.getElementById("modal_ADD_TARGET").style.transform = "translateX(0rem)";
-                                // duration
-                                document.getElementById("modal_ADD_TARGET").style.transition = "all 0.5s ease";
+
+                    <div onClick={openModal} className="py-5 shrink-0 
+                        bg-gradient-to-t bg-black bg-opacity-20 backdrop-blur-md
+                       self-stretch w-14 rounded-2xl flex justify-center items-center text-white text-4xl active:bg-white
+                       hover:bg-opacity-50 duration-300 cursor-pointer mt-5
+                       ">+</div>
+
+                    <div className="shrink-0 md:w-1/6 mt-5 w-3/5 flex flex-col items-center justify-center text-white 
+                    
+                    ">
+                        <div
+                            onClick={
+                                () => {
+                                    document.getElementById("modal_ADD_TARGET").style.transform = "translateX(0rem)";
+                                    // duration
+                                    document.getElementById("modal_ADD_TARGET").style.transition = "all 0.5s ease";
+                                }
+
                             }
+                            className=" bg-black bg-opacity-30
+                      backdrop-blur-md drop-shadow-xl p-7 text-white rounded-3xl ml-5 hover:bg-opacity-50 duration-300 cursor-pointer">
 
-                        } className="
-                        bg-gradient-to-t from-green-500 to-blue-900 w-14
-                        h-full mt-5 py-5 shrink-0 self-stretch rounded-xl flex justify-center items-center text-white text-4xl">🎯</div>
-                    </div>
-
-                    {/* target block */}
-                    <div className="shrink-0 bg-black bg-opacity-30 border border-white backdrop-blur-md w-3/5 drop-shadow-xl p-5 text-white rounded-3xl ml-20 ">
-                        <h1>🎯Target</h1>
-                        {/* Target name */}
-                        <h1 className="mt-2 text-2xl">{
-                            state.targetName === "" ? "No target" : state.targetName
-                        }</h1>
-                        <h1 className="mt-2 text-xl text-green-300 font-bold">{
-                            state.targetName === "" ? "No target" : state.targetAmount
-                        }</h1>
-                        {/* When i can buy it date*/}
-                        <div className="mt-2 w-max bg-[#ffffff55] rounded-full px-3 py-1">🕑{
-                            state.targetName === "" ? "No target" : "04.08.2023"
-                        }</div>
+                            {/* Target name */}
+                            <h1 className="mt-2 text-2xl">{
+                                state.targetName === "" ? "No target" : state.targetName
+                            }</h1>
+                            <h1 className="mt-2 text-xl text-green-300 font-bold">{
+                                state.targetName === "" ? "No target" : state.targetAmount
+                            }</h1>
+                            {/* When i can buy it date*/}
+                            <div className="mt-2 w-max bg-[#ffffff55] rounded-full px-3 py-1">🕑{
+                                state.targetName === "" ? "No target" : "04.08.2023"
+                            }</div>
 
 
+                        </div>
+                        <h1 className="text-lg font-bold mt-1">🎯Target</h1>
                     </div>
 
                     {/* Categories */}
                     {
                         Object.keys(state.expCategories).map((key) => (
-                            <div
-                                className="shrink-0 bg-gradient-to-b  
-                            from-red-500 to-yellow-900
-                            w-2/5 drop-shadow-xl p-5 text-white rounded-3xl ml-5 ">
-                                <h1>{key === "Housing" ? "🏠Housing" : ""}
-                                    {key === "Food" ? "🍗Food" : ""}
-                                    {key === "Saving" ? "💸Saving" : ""}
-                                    {key === "Transport" ? "🚗Transport" : ""}
-                                    {key === "Clothing" ? "👕Clothing" : ""}
-                                    {key === "Health" ? "🏥Health" : ""}
-                                    {key === "Entertainment" ? "🎮Entertai..." : ""}
-                                    {key === "Other" ? "📦Other" : ""}
-                                </h1>
-                                <h1 className="mt-2 text-2xl">{state.expCategories[key]}</h1>
-                                <div className="mt-2 w-max bg-[#ffffff55] rounded-full px-3 py-1">{(state.expCategories[key] / state.balance * 100).toFixed()}%</div>
-                            </div>
+                            <>
+                                <div className="mt-5 w-3/5 md:w-1/6 self-stretch shrink-0 text-white text-center">
+                                    <div
+                                        className="shrink-0 bg-gradient-to-b
+                                bg-black  bg-opacity-30 backdrop-blur-md
+                            card
+                           drop-shadow-xl p-5 text-white rounded-3xl text-center
+                           hover:bg-opacity-50 duration-300 cursor-pointer ml-5
+                          
+                           ">
+
+                                        <div className="flex flex-col justify-between items-center ">
+                                            <h1 className=" text-4xl font-bold">{state.expCategories[key]}</h1>
+                                            {/* <div className="mt-5 w-max  bg-[#ffffff55] rounded-full px-3 py-1">{(state.expCategories[key] / state.balance * 100).toFixed()}%</div> */}
+                                            <CircularProgressbar className="w-20 mt-2 text-white" value={
+                                                state.expCategories[key] / state.balance * 100 > 100 ? 100 : state.expCategories[key] / state.balance * 100
+                                            } text={`${state.expCategories[key] / state.balance * 100 > 100 ? 100 : (state.expCategories[key] / state.balance * 100).toFixed()
+                                                }%`}
+                                                styles={{
+                                                    root: {},
+                                                    path: {
+                                                        transition: 'stroke-dashoffset 0.5s ease 0s',
+                                                        transformOrigin: 'center center',
+                                                        stroke: '#4976CD',
+                                                    },
+                                                    trail: {
+                                                        stroke: '#ffffff00',
+                                                        strokeLinecap: 'butt',
+
+                                                    },
+                                                    text: {
+                                                        fill: '#fff',
+                                                        fontSize: '25px',
+                                                    },
+                                                    background: {
+                                                        fill: '#ffffff00',
+                                                    },
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mt-2">
+                                        <h1 className="text-lg font-bold">{key === "Housing" ? "🏠Housing" : ""}
+                                            {key === "Food" ? "🍗Food" : ""}
+                                            {key === "Saving" ? "💸Saving" : ""}
+                                            {key === "Transport" ? "🚗Transport" : ""}
+                                            {key === "Clothing" ? "👕Clothing" : ""}
+                                            {key === "Health" ? "🏥Health" : ""}
+                                            {key === "Entertainment" ? "🎮Entertai..." : ""}
+                                            {key === "Other" ? "📦Other" : ""}
+                                        </h1>
+                                    </div>
+                                </div>
+                            </>
+
                         ))
 
                     }
@@ -726,10 +786,10 @@ const PlannedExpenses = () => {
             </div>
 
             {/* Spending this month */}
-            <div className="my-10 pb-20 mt-[410px] pt-5 backdrop-blur-sm  w-full px-5 overflow-x-hidden bg-black bg-opacity-80 z-40 absolute
+            <div className="my-10 pb-20 md:mt-5 mt-[410px] pt-5 backdrop-blur-sm  w-full px-5 overflow-x-hidden bg-black bg-opacity-80 z-40 absolute
              ">
-                <a href="#top"><div className="w-32 h-1 rounded-full mt-2 bg-white m-auto absolute left-0 top-0 ml-32"></div></a>
-                <div className="overflow-y-scroll overflow-x-hidden">
+                <a href="#top"><div className="w-32 h-1 rounded-full mt-2 bg-white m-auto absolute left-0 top-0 ml-32 md:hidden"></div></a>
+                <div className="overflow-y-scroll md:overflow-y-hidden  overflow-x-hidden md:w-2/3 md:m-auto">
                     {/* Today expenses */}
                     <h1 className="text-white text-xl">Today</h1>
                     {/* sort by date "TODAY" */}

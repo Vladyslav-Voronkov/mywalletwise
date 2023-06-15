@@ -41,7 +41,7 @@ const Header = () => {
 
 
     return (
-        <header className="bg-transparent flex justify-between items-center px-2 py-5 fixed w-full ">
+        <header className="bg-transparent flex justify-between items-center px-2 py-2 fixed w-full backdrop-blur-md z-30 ">
             {/* User */}
             <div className="flex items-center">
                 {
@@ -52,14 +52,14 @@ const Header = () => {
                                 // display flex
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "1";
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.5s ease";
-                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-18rem)";
+                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-13rem)";
                                 // document.getElementById("modal_ACCOUNT_SETTINGS").style.visibility = "visible";
 
                             }
 
                         } width={60} src={avatar_1} className="
-                        bg-gradient-to-tr from-[#ff8a00] to-[#e52e71]
-                        p-1 rounded-full" alt="Default Avatar" />
+                        bg-gradient-to-tr from-[#4d5fae] to-[#4c3067] drop-shadow-xl
+                        p-1 rounded-full cursor-pointer hover:scale-105 duration-300" alt="Default Avatar" />
                     ) : (<div></div>)
                 }
                 {
@@ -70,14 +70,14 @@ const Header = () => {
                                 // display flex
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "1";
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.5s ease";
-                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-18rem)";
+                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-13rem)";
                                 // document.getElementById("modal_ACCOUNT_SETTINGS").style.visibility = "visible";
 
                             }
 
                         } width={60} src={avatar_2} className="
-                        bg-gradient-to-tr from-[#ff8a00] to-[#e52e71]
-                        p-1 rounded-full" alt="Default Avatar" />
+                        bg-gradient-to-tr from-[#4d5fae] to-[#4c3067] drop-shadow-xl
+                        p-1 rounded-full cursor-pointer hover:scale-105 duration-300" alt="Default Avatar" />
                     ) : (<div></div>)
                 }
                 {
@@ -88,14 +88,14 @@ const Header = () => {
                                 // display flex
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "1";
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.5s ease";
-                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-18rem)";
+                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-13rem)";
                                 // document.getElementById("modal_ACCOUNT_SETTINGS").style.visibility = "visible";
 
                             }
 
                         } width={60} src={avatar_3} className="
-                        bg-gradient-to-tr from-[#ff8a00] to-[#e52e71]
-                        p-1 rounded-full" alt="Default Avatar" />
+                        bg-gradient-to-tr from-[#4d5fae] to-[#4c3067] drop-shadow-xl
+                        p-1 rounded-full cursor-pointer hover:scale-105 duration-300" alt="Default Avatar" />
                     ) : (<div></div>)
 
                 }
@@ -107,14 +107,14 @@ const Header = () => {
                                 // display flex
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "1";
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.5s ease";
-                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-18rem)";
+                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-13rem)";
                                 // document.getElementById("modal_ACCOUNT_SETTINGS").style.visibility = "visible";
 
                             }
 
                         } width={60} src={avatar_4} className="
-                        bg-gradient-to-tr from-[#ff8a00] to-[#e52e71]
-                        p-1 rounded-full" alt="Default Avatar" />
+                        bg-gradient-to-tr from-[#4d5fae] to-[#4c3067] drop-shadow-xl
+                        p-1 rounded-full cursor-pointer hover:scale-105 duration-300" alt="Default Avatar" />
                     ) : (<div></div>)
 
                 }
@@ -126,14 +126,14 @@ const Header = () => {
                                 // display flex
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "1";
                                 document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.5s ease";
-                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-18rem)";
+                                document.getElementById("modal_ACCOUNT_SETTINGS").style.transform = "translateY(-13rem)";
                                 // document.getElementById("modal_ACCOUNT_SETTINGS").style.visibility = "visible";
 
                             }
 
                         } width={60} src={avatar_5} className="
-                        bg-gradient-to-tr from-[#ff8a00] to-[#e52e71]
-                        p-1 rounded-full" alt="Default Avatar" />
+                        bg-gradient-to-tr from-[#4d5fae] to-[#4c3067] drop-shadow-xl
+                        p-1 rounded-full cursor-pointer hover:scale-105 duration-300" alt="Default Avatar" />
                     ) : (<div></div>)
 
                 }
