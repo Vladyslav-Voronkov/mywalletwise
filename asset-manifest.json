@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/mywalletwise/static/css/main.a3c78515.css",
-    "main.js": "/mywalletwise/static/js/main.1d13b18c.js",
+    "main.css": "/mywalletwise/static/css/main.3d766644.css",
+    "main.js": "/mywalletwise/static/js/main.134166d9.js",
     "static/media/avatar-3.webp": "/mywalletwise/static/media/avatar-3.edb284be5661c46b91c9.webp",
     "static/media/avatar-1-preview.webp": "/mywalletwise/static/media/avatar-1-preview.9f62aa74a41162b1c01a.webp",
     "static/media/avatar-3-preview.webp": "/mywalletwise/static/media/avatar-3-preview.fda7f41ba92930e4aab8.webp",
@@ -14,12 +14,28 @@
     "static/media/avatar-2-preview.webp": "/mywalletwise/static/media/avatar-2-preview.d9cf480841fc80aadb20.webp",
     "static/media/avatar-4.webp": "/mywalletwise/static/media/avatar-4.88860dcbb8c770f13c47.webp",
     "static/media/avatar-default-icon.png": "/mywalletwise/static/media/avatar-default-icon.867978d9a80136f33711.png",
+    "static/media/entertainment.svg": "/mywalletwise/static/media/entertainment.f7b5d5fc7c61af03846e9968a5d14e21.svg",
+    "static/media/food.svg": "/mywalletwise/static/media/food.e5637532a1380a065a0074fa5b86d775.svg",
+    "static/media/target.svg": "/mywalletwise/static/media/target.7733f58edfb4dc3f04bdfd9a908ea8ed.svg",
+    "static/media/health.svg": "/mywalletwise/static/media/health.ecae5d2bc730cfd18e5e6c376f34c488.svg",
+    "static/media/transport.svg": "/mywalletwise/static/media/transport.9615ecb6ea53b9ba452e2aac53da7430.svg",
+    "static/media/saving.svg": "/mywalletwise/static/media/saving.69794a03e010b400d12831bd3f1bbe65.svg",
+    "static/media/pencil-alt.svg": "/mywalletwise/static/media/pencil-alt.6c06e5e0555096c65e91bc58fb8d808d.svg",
+    "static/media/home.svg": "/mywalletwise/static/media/home.522513e9202b8ba1eaae9fda4ac6011e.svg",
+    "static/media/beaker.svg": "/mywalletwise/static/media/beaker.69fd921b311cb4188abab510e6744e24.svg",
     "index.html": "/mywalletwise/index.html",
-    "main.a3c78515.css.map": "/mywalletwise/static/css/main.a3c78515.css.map",
-    "main.1d13b18c.js.map": "/mywalletwise/static/js/main.1d13b18c.js.map"
+    "static/media/clothing.svg": "/mywalletwise/static/media/clothing.da519ce14fb17baa2cfc9a70577a0051.svg",
+    "static/media/save.svg": "/mywalletwise/static/media/save.95be3a6619442a6f5b21d7f79a83736b.svg",
+    "static/media/calendar.svg": "/mywalletwise/static/media/calendar.cd9d3cf23bfa507c20b5ad0df20706ca.svg",
+    "static/media/starsai.svg": "/mywalletwise/static/media/starsai.f8f5318413192622d361346107e1497c.svg",
+    "static/media/other.svg": "/mywalletwise/static/media/other.898645d3b2118f4fa9bbe49a898f7b54.svg",
+    "static/media/x.svg": "/mywalletwise/static/media/x.5917e5c2e207989b5841341c321ddb66.svg",
+    "static/media/check.svg": "/mywalletwise/static/media/check.85d665716ae3eb77aa3cc764f493ffef.svg",
+    "main.3d766644.css.map": "/mywalletwise/static/css/main.3d766644.css.map",
+    "main.134166d9.js.map": "/mywalletwise/static/js/main.134166d9.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3c78515.css",
-    "static/js/main.1d13b18c.js"
+    "static/css/main.3d766644.css",
+    "static/js/main.134166d9.js"
   ]
 }
