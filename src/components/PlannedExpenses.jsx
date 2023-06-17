@@ -39,7 +39,7 @@ const PlannedExpenses = () => {
     const [expenses, setExpenses] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/data')
+        axios.get('https://wallet-wise-6fd456725a95.herokuapp.com/api/data')
             .then(response => {
             //     set expenses from database to state where username = localstorage username
                 if(JSON.parse(localStorage.getItem("user"))){
@@ -86,7 +86,7 @@ const PlannedExpenses = () => {
         };
 
         // Отправляем данные на сервер
-        fetch('/api/register', {
+        fetch('https://wallet-wise-6fd456725a95.herokuapp.com/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const PlannedExpenses = () => {
         };
 
         // Отправляем данные на сервер
-        fetch('/api/login', {
+        fetch('https://wallet-wise-6fd456725a95.herokuapp.com/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ const PlannedExpenses = () => {
         avatar_name: "avatar_1",
     }
 
-    // get expenses data from /api/expenses
+    // get expenses data from https://wallet-wise-6fd456725a95.herokuapp.com/api/expenses
 
     // load avatar from local storage
     const loadAvatar = () => {
@@ -241,7 +241,7 @@ const PlannedExpenses = () => {
             newExpense.date = new Date().toISOString().slice(0, 10);
         }
 
-        axios.post("/api/add", newExpense).then((res) => {
+        axios.post("https://wallet-wise-6fd456725a95.herokuapp.com/api/add", newExpense).then((res) => {
             console.log(res.data);
         }).catch((err) => {
             console.log(err);
@@ -400,7 +400,7 @@ const PlannedExpenses = () => {
         // find this name in localstorage
 
         const categories = JSON.parse(localStorage.getItem("expenses"));
-        // get categories with key expenses from /api/data
+        // get categories with key expenses from https://wallet-wise-6fd456725a95.herokuapp.com/api/data
 
         // if categories is not defined then set categories to empty array
         if (categories === null || categories.length === 0 || categories === undefined) {
@@ -441,7 +441,7 @@ const PlannedExpenses = () => {
         }
     }
 
-    // Register function, to /api/register route username password email register date and last activity date axios
+    // Register function, to https://wallet-wise-6fd456725a95.herokuapp.com/api/register route username password email register date and last activity date axios
     const Register = async () => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
@@ -455,7 +455,7 @@ const PlannedExpenses = () => {
             registerDate: registerDate,
             lastActivityDate: lastActivityDate
         }
-        await axios.post("/api/register", data);
+        await axios.post("https://wallet-wise-6fd456725a95.herokuapp.com/api/register", data);
     //  set localstorage to username if register is success
         localStorage.setItem("username", data.username);
     }
