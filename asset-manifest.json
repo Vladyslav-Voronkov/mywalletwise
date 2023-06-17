@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mywalletwise/static/css/main.3d766644.css",
-    "main.js": "/mywalletwise/static/js/main.134166d9.js",
+    "main.js": "/mywalletwise/static/js/main.dd8b1aff.js",
     "static/media/avatar-3.webp": "/mywalletwise/static/media/avatar-3.edb284be5661c46b91c9.webp",
     "static/media/avatar-1-preview.webp": "/mywalletwise/static/media/avatar-1-preview.9f62aa74a41162b1c01a.webp",
     "static/media/avatar-3-preview.webp": "/mywalletwise/static/media/avatar-3-preview.fda7f41ba92930e4aab8.webp",
@@ -32,10 +32,10 @@
     "static/media/x.svg": "/mywalletwise/static/media/x.5917e5c2e207989b5841341c321ddb66.svg",
     "static/media/check.svg": "/mywalletwise/static/media/check.85d665716ae3eb77aa3cc764f493ffef.svg",
     "main.3d766644.css.map": "/mywalletwise/static/css/main.3d766644.css.map",
-    "main.134166d9.js.map": "/mywalletwise/static/js/main.134166d9.js.map"
+    "main.dd8b1aff.js.map": "/mywalletwise/static/js/main.dd8b1aff.js.map"
   },
   "entrypoints": [
     "static/css/main.3d766644.css",
-    "static/js/main.134166d9.js"
+    "static/js/main.dd8b1aff.js"
   ]
 }
