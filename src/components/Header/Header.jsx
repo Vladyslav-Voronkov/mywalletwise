@@ -27,18 +27,14 @@ const Header = () => {
 
     loadAvatar();
 
-    React.useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (user) {
-            state.user = user;
-        }
-    }, state.user = {
-        name: "Vladyslav Voronkov",
+
+
+    if(JSON.parse(localStorage.getItem("user"))){
+        state.user = JSON.parse(localStorage.getItem("user")).username;
+    } else {
+        state.user = "User";
     }
-    );
-
-
-
+        // alert(state.user);
 
     return (
         <header className="bg-transparent flex justify-between items-center px-2 py-2 fixed w-full backdrop-blur-md z-30 ">
@@ -118,7 +114,7 @@ const Header = () => {
                     ) : (<div></div>)
 
                 }
-                 {
+                {
                     state.avatar_name === "avatar_5" ? (
                         <img onClick={
                             // open modal settings
@@ -139,22 +135,25 @@ const Header = () => {
                 }
                 {/* UserName and Mountly Budget */}
                 <div className="text-white ml-2">
-                    <h2 className="text-xs text-gray-400">Hi, {state.user.name}!</h2>
+                    <h2 className="text-xs text-gray-400">Hi, {state.user}!</h2>
                     <p><span className="text-gray-400">Wallet</span> Wise</p>
                 </div>
             </div>
 
             {/* My Balance */}
-            <div className="" onClick={
-                () => {
-                    // clear local storage
-                    localStorage.clear();
-                    window.location.reload();
-                }
-            }>
-                <div className="flex justify-between items-center  text-white border border-gray-500 bg-[#222] p-2 rounded-full">
+            <div>
+                <div className="flex justify-between items-center  text-white border bborder-gray-500 backdrop-blur-md p-2 rounded-full
+                hover:scale-105 duration-300 cursor-pointer hover:bg-gray-500 hover:bg-opacity-10
+                ">
                     <div className="w-3 h-3 mr-2 bg-green-500 rounded-full"></div>
-                    <span>My Balance</span>
+                    <span
+                    onClick={
+                    () => {
+                        localStorage.clear();
+                        window.location.reload();
+                    }
+                    }
+                    >Log Out</span>
                 </div>
             </div>
         </header>
