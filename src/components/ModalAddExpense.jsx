@@ -14,11 +14,34 @@ import health from "../img/icons/health.svg";
 import entertainment from "../img/icons/entertainment.svg";
 import other from "../img/icons/other.svg";
 
+// import use state
+import { useState } from "react";
+
 const ModalAddExpense = ({
     state,
     changecategory,
     addexpense
 }) => {
+
+    // state of the cat_name
+    const [cat_name, setCat_name] = useState("Housing");
+
+    // setCatName from document.getElementById("exp_cat") where innerHTML was changed
+    const setCatName = () => {
+        if(document.getElementById("exp_cat") !== null){
+            setCat_name(document.getElementById("exp_cat").innerHTML);
+        }
+    }
+
+    // setCatName();
+
+    // if exp_cat text inside was changed
+    // setCatName();
+    if(document.getElementById("exp_cat") !== null){
+        document.getElementById("exp_cat").addEventListener("DOMSubtreeModified", setCatName);
+
+    }
+
     return (
         <>
             <div
@@ -27,11 +50,25 @@ const ModalAddExpense = ({
                 <div className="bg-[#111] bg-opacity-50 translate-y-10 backdrop-blur-md rounded-2xl w-3/3 mx-2 h-2/2 sm:w-1/2 ">
                     
                     {/* Header */}
-                    <div className="flex justify-between items-center px-5 py-3">
+                    <div className="flex justify-between items-center px-3 py-3">
                         {/* Window name */}
-                        <h1 className="text-2xl text-white flex items-center">
-                            <img src={save} alt="save_icon" className="w-5 h-5 mr-2" />
-                            Add Expense</h1>
+                        <h1 id="exp_cat" className="hidden text-2xl text-white flex items-center">
+                            Housing</h1>
+                        <div className="
+                        bg-[#111] bg-opacity-50 rounded-full p-2 flex justify-center items-center
+                        text-white w-full mr-2
+                        ">
+
+                            {cat_name === "Housing" ? <img src={home} alt="home" className="w-10 h-10" /> : null}
+                            {cat_name === "Food" ? <img src={food} alt="food" className="w-10 h-10" /> : null}
+                            {cat_name === "Saving" ? <img src={save} alt="save" className="w-7 h-7 mr-2" /> : null}
+                            {cat_name === "Transport" ? <img src={tansport} alt="tansport" className="w-10 h-10" /> : null}
+                            {cat_name === "Clothing" ? <img src={clothing} alt="clothing" className="w-10 h-10" /> : null}
+                            {cat_name === "Health" ? <img src={health} alt="health" className="w-10 h-10" /> : null}
+                            {cat_name === "Entertainment" ? <img src={entertainment} alt="entertainment" className="w-10 h-10" /> : null}
+                            {cat_name === "Other" ? <img src={other} alt="other" className="w-10 h-10" /> : null}
+                            {cat_name} / Add Expense
+                        </div>
                         {/* Close window */}
                         <button className="text-2xl text-white" onClick={() => {
                             // document.getElementById("modal_ADD_EXPENSE").style.display = "none";
@@ -43,100 +80,28 @@ const ModalAddExpense = ({
                         </button>
                     </div>
 
-                    {/* Preview block */}
-                    <h1 className="text-white text-xl px-5 pb-2">Preview</h1>
-                    <div className="flex justify-between items-center mx-5 px-2 rounded-md  border-white border py-2">
-                        <div className="flex justify-between items-center">
-                            <div  className="
-                           bg-gradient-to-r from-purple-700 to-blue-500
-                             rounded-full p-5">
-                                <img id="preview_category_icon" src={home} alt="home_icon" className="w-7 h-7" />
-                            </div>
-                            <div className="ml-3">
-                                <h1
-                                    id="preview_name"
-                                    className="text-white text-lg">Name</h1>
-                                <h1
-                                    id="preview_category"
-                                    className="text-gray-400 text-sm">Housing</h1>
-                            </div>
-                        </div>
-                        <div>
-                            <h1 id="preview_amount" className="text-white text-xl text-right">- 0</h1>
-                        </div>
-                    </div>
+
 
                     <div className="px-5 py-3">
                         <div className="flex justify-between items-center">
+                            <label
+                                className="text-white text-2xl
+                                mr-5
+                                "
+                                htmlFor="name">Name:</label>
                             <input onChange={changecategory
 
                             } placeholder="Name" id="name" name="name" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
                         </div>
                         <div className="flex justify-between items-center mt-5">
-                            <input onChange={
-                                // preview amount
-                                () => {
-                                    const amount = document.getElementById("amount").value;
-                                    document.getElementById("preview_amount").innerHTML = `- ${amount}`;
-                                }
-                            } placeholder="Amount" id="amount" name="amount" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />
+                            <label htmlFor="amount" className="text-white text-2xl mr-5">Amount:</label>
+                            <input placeholder="Amount" id="amount" name="amount" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="number"
+                            pattern={"[0-9]*"}
+                            />
                         </div>
                         <div className="flex justify-between items-center mt-5">
-                            <select onChange={
-                                // preview category
-                                () => {
-                                    const category = document.getElementById("category").value;
-                                    document.getElementById("preview_category").innerHTML = category;
-                                    switch (category) {
-                                        case "Housing":
-                                            document.getElementById("preview_category").innerHTML = "Housing";
-                                            document.getElementById("preview_category_icon").src = home;
-                                            break;
-                                        case "Food":
-                                            document.getElementById("preview_category").innerHTML = "Food";
-                                            document.getElementById("preview_category_icon").src = food;
-                                            break;
-                                        case "Saving":
-                                            document.getElementById("preview_category").innerHTML = "Saving";
-                                            document.getElementById("preview_category_icon").src = saving;
-                                            break;
-                                        case "Transport":
-                                            document.getElementById("preview_category").innerHTML = "Transport";
-                                            document.getElementById("preview_category_icon").src = tansport;
-                                            break;
-                                        case "Clothing":
-                                            document.getElementById("preview_category").innerHTML = "Clothing";
-                                            document.getElementById("preview_category_icon").src = clothing;
-                                            break;
-                                        case "Health":
-                                            document.getElementById("preview_category").innerHTML = "Health";
-                                            document.getElementById("preview_category_icon").src = health;
-                                            break;
-                                        case "Entertainment":
-                                            document.getElementById("preview_category").innerHTML = "Entertainment";
-                                            document.getElementById("preview_category_icon").src = entertainment;
-                                            break;
-                                        case "Other":
-                                            document.getElementById("preview_category").innerHTML = "Other";
-                                            document.getElementById("preview_category_icon").src = other;
-                                            break;
-                                }}
-
-                            } id="category" name="category" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent">
-                                <option className="bg-[#111] text-white" value="Housing">🏠Housing</option>
-                                <option className="bg-[#111] text-white" value="Food">🍗Food</option>
-                                <option className="bg-[#111] text-white" value="Saving">💸Saving</option>
-                                <option className="bg-[#111] text-white" value="Transport">🚗Transport</option>
-                                <option className="bg-[#111] text-white" value="Clothing">👕Clothing</option>
-                                <option className="bg-[#111] text-white" value="Health">🏥Health</option>
-                                <option className="bg-[#111] text-white" value="Entertainment">🎮Entertainment</option>
-                                <option className="bg-[#111] text-white" value="Other">📦Other</option>
-                            </select>
-                        </div>
-                        <div className="flex justify-between items-center mt-5">
-                            <input placeholder={
-                                new Date().toISOString().slice(0, 10)
-                            } id="date" name="date" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="date" />
+                            <label htmlFor="date" className="text-white text-2xl mr-5">Date:</label>
+                            <input id="date" name="date" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 h-12 outline-none bg-transparent" type="date" />
                         </div>
                         <div className="flex justify-between items-center mt-5">
                             <textarea placeholder="Notes" id="notes" name="notes" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="text" />

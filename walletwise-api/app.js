@@ -11,6 +11,14 @@ const configuration = new Configuration({
     apiKey: "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",
 });
 
+// Middleware для обработки CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
 app.use(bodyParser.json());
 app.use(express.json());
 
@@ -88,10 +96,6 @@ app.post('/api/register', (req, res) => {
 app.post('/api/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-
-    // Проверяем логин и пароль в базе данных или в другом источнике данных
-    // В этом примере предполагается использование модели User
-
     User.findOne({ username: username, password: password })
         .then(user => {
             if (user) {

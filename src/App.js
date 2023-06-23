@@ -7,7 +7,7 @@ import PlannedExpenses from './components/PlannedExpenses';
 function App() {
   return (
     <>
-      <Header />
+
       <PlannedExpenses />
     </>
   );

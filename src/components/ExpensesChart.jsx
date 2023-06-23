@@ -17,14 +17,14 @@ const Expenses_chart = ({
     return (
         <>
 
-            <div className="mx-5 flex justify-between md:mx-20 items-center">
+            <div className="mx-5 flex justify-between sm:mx-20 items-center">
                 <div>
                     <span className="text-gray-400">Planned Expenses
 
                     </span>
                     <h1 className="text-4xl font-bold mt-3 text-white
                     hover:text-gray-400 transition duration-500 ease-in-out cursor-pointer
-                    ">{balance}</h1>
+                    ">{balance} PLN</h1>
                     {
                         localStorage.getItem("dynamic_budget") === "true" ? (
                             <div
@@ -35,7 +35,7 @@ const Expenses_chart = ({
                                 flex-col
                                 "> {
                                 budget - balance
-                            } Left to budget
+                            } PLN Left to budget
                                 <div className="flex items-center justify-start">
                                     <img src = {stars} alt = "stars" className = "w-5 h-5 "/>
                                     <p className="
@@ -49,7 +49,7 @@ const Expenses_chart = ({
                                 className="mt-3 rounded-full border-gray-400 border  w-max p-1 text-white px-2 cursor-pointer
                                 hover:bg-gray-400 hover:bg-opacity-10 backdrop-blur-md transition duration-500 ease-in-out">{
                                 budget - balance
-                            } Left to budget
+                            } PLN Left to budget
                             </div>
                         )
                     }
@@ -57,7 +57,7 @@ const Expenses_chart = ({
 
                 {/* Pie chart */}
                 <div>
-                    <CircularProgressbar className="w-32 md:w-42 text-white" value={
+                    <CircularProgressbar className="w-32 sm:w-42 text-white" value={
                         balance / budget * 100 > 100 ? 100 : balance / budget * 100
                     } text={`${balance / budget * 100 > 100 ? 100 : (balance / budget * 100).toFixed()
                         }%`}
@@ -66,7 +66,7 @@ const Expenses_chart = ({
                             path: {
                                 transition: 'stroke-dashoffset 0.5s ease 0s',
                                 transformOrigin: 'center center',
-                                stroke: '#4976CDaa',
+                                stroke: balance / budget * 100 > 70 ? '#ff0000' : '#4976CD',
                             },
                             trail: {
                                 stroke: '#ffffff00',

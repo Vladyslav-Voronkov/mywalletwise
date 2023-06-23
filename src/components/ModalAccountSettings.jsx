@@ -58,8 +58,16 @@ const ModalAccountSettings = ({
                                 Avatar
                             </div>
                             <div className="text-white flex flex-col items-center ml-5">
-                                <button className="bg-gradient-to-t from-green-500 to-blue-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl">🖌️</button>
-                                Username
+                                <button onClick={
+                                    () => {
+                                        if (document.getElementById("bg_particles").style.display === "none") {
+                                            document.getElementById("bg_particles").style.display = "flex";
+                                        } else {
+                                            document.getElementById("bg_particles").style.display = "none";
+                                        }
+                                    }
+                                } className="bg-gradient-to-t from-green-500 to-blue-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl">🖌️</button>
+                                Particles
                             </div>
                         </div>
 

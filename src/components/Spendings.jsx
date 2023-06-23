@@ -8,6 +8,10 @@ import health from "../img/icons/health.svg";
 import entertainment from "../img/icons/entertainment.svg";
 import other from "../img/icons/other.svg";
 
+import aos from 'aos';
+
+
+
 const Icons = (
     { expense }
 ) => {
@@ -65,9 +69,10 @@ const Icons = (
 const Spendings = ({
     state, expenses
 }) => {
+    aos.init();
     return (
         <>
-            <div className="my-10 pb-20 md:mt-5 mt-[450px] pt-5 backdrop-blur-sm  w-full px-5 overflow-x-hidden bg-black bg-opacity-80 z-40 absolute
+            <div className="my-10 pb-20 md:mt-5 mt-[450px] pt-5 backdrop-blur-sm  w-full px-5 overflow-x-hidden bg-gray-800 bg-opacity-50 z-40 absolute
              ">
                 <a href="#top"><div className="w-32 h-1 rounded-full mt-2 bg-white m-auto absolute left-0 top-0 ml-32 md:hidden"></div></a>
                 <div className="overflow-y-scroll md:overflow-y-hidden  overflow-x-hidden md:w-2/3 md:m-auto">
@@ -79,10 +84,11 @@ const Spendings = ({
                         expenses.filter((expense) => {
                             const today = new Date();
                             const date = new Date(expense.date);
+
                             return date.getDate() === today.getDate();
                         }
                         ).reverse().map((expense) => (
-                            <div
+                            <div data-aos="zoom-in-up"
                                 id={expense.id}
                                 className="flex justify-between items-center mt-4">
                                 <div
@@ -107,29 +113,29 @@ const Spendings = ({
                                     className="absolute hidden bg-red-500 rounded-full p-2 ml-10 mb-10 justify-center items-center text-white text-sm active:bg-white">🗑️</div>
                                 <Icons expense={expense} />
                                 <div>
-                                    <h1 className="text-white text-xl text-right">- {expense.amount}</h1>
+                                    <h1 className="text-white text-xl text-right">- {parseFloat(expense.amount)} PLN</h1>
                                 </div>
                             </div>
                         ))
                     }
                     {/* yesterday expenses */}
-                    <h1 className="text-white text-xl mt-10">Yesterday</h1>
+                    {/*<h1 className="text-white text-xl mt-10">Yesterday</h1>*/}
                     {/* sort by date "YESTERDAY" */}
-                    {
-                        expenses.filter((expense) => {
-                            const today = new Date();
-                            const date = new Date(expense.date);
-                            return date.getDate() === today.getDate() - 1;
-                        }
-                        ).map((expense) => (
-                            <div className="flex justify-between items-center mt-4" >
-                                <Icons expense={expense} />
-                                <div>
-                                    <h1 className="text-white text-xl text-right">- {expense.amount}</h1>
-                                </div>
-                            </div>
-                        ))
-                    }
+                    {/*{*/}
+                    {/*    expenses.filter((expense) => {*/}
+                    {/*        const today = new Date();*/}
+                    {/*        const date = new Date(expense.date);*/}
+                    {/*        return date.getDate() === today.getDate() - 1;*/}
+                    {/*    }*/}
+                    {/*    ).map((expense) => (*/}
+                    {/*        <div className="flex justify-between items-center mt-4" >*/}
+                    {/*            <Icons expense={expense} />*/}
+                    {/*            <div>*/}
+                    {/*                <h1 className="text-white text-xl text-right">- {expense.amount}</h1>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    ))*/}
+                    {/*}*/}
                     {/* earlier */}
                     <h1 className="text-white text-xl mt-10">Earlier</h1>
                     {/* sort by date "EARLIER" */}
@@ -137,14 +143,19 @@ const Spendings = ({
                         expenses.filter((expense) => {
                             const today = new Date();
                             const date = new Date(expense.date);
-                            return date.getDate() < today.getDate() - 1;
+                            return date.getDate() < today.getDate();
                         }
                         ).map((expense) => (
-                            <div className="flex justify-between items-center mt-4">
+                            <div data-aos="zoom-in-up" className="flex justify-between items-center mt-4">
                                 <Icons expense={expense} />
                                 <div>
-                                    <h1 className="text-white text-xl text-right">- {expense.amount}</h1>
-
+                                    <h1 className="text-white text-xl text-right">- {parseFloat(expense.amount)} PLN</h1>
+                                    <h1 className="text-gray-400 text-sm text-right">{
+                                    //     date of expense
+                                    new Date(expense.date).getDate() + "." +
+                                    new Date(expense.date).getMonth() + "." +
+                                    new Date(expense.date).getFullYear()
+                                    }</h1>
                                 </div>
 
                             </div>

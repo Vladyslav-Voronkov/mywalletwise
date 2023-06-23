@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import Header from '../components/Header/Header';
 
 // Categories icons
 import home from "../img/icons/home.svg";
@@ -12,6 +13,7 @@ import clothing from "../img/icons/clothing.svg";
 import health from "../img/icons/health.svg";
 import entertainment from "../img/icons/entertainment.svg";
 import other from "../img/icons/other.svg";
+import bell from "../img/icons/bell.svg";
 
 import logo from "../img/logo.png"
 import x from "../img/icons/x.svg"
@@ -25,7 +27,7 @@ import ModalAddTarget from "./ModalAddTarget";
 import ModalSetBudget from "./ModalSetBudget";
 import ModalAddExpense from "./ModalAddExpense";
 
-
+const prodServer = "https://wallet-wise-6fd456725a95.herokuapp.com";
 const PlannedExpenses = () => {
 
     // new expense state
@@ -68,6 +70,7 @@ const PlannedExpenses = () => {
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     };
+
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
@@ -180,7 +183,14 @@ const PlannedExpenses = () => {
 
     // when page is loaded then close preloader react
 
-
+    // open and close the modal_notifications
+    const opencloseModalNotifications = () => {
+        if (document.getElementById("modal_notifications").style.display === "none") {
+            document.getElementById("modal_notifications").style.display = "block";
+        } else {
+            document.getElementById("modal_notifications").style.display = "none";
+        }
+    }
 
     const calculateBalance = () => {
         let total = 0;
@@ -193,18 +203,26 @@ const PlannedExpenses = () => {
     }
     calculateBalance();
 
-    const openModal = () => {
+    const openModal = (
+        cat
+                       ) => {
         // document.getElementById("modal_ADD_EXPENSE").style.display = "flex";
         document.getElementById("modal_ADD_EXPENSE").style.transform = "translateX(0rem)";
         document.getElementById("modal_ADD_EXPENSE").style.opacity = "1";
         document.getElementById("modal_ADD_EXPENSE").style.transition = "all 0.5s ease";
+        document.getElementById("category_selector").classList.add("opacity-0");
+        document.getElementById("img_add").classList.add("rotate-45");
+        document.getElementById("category_selector").classList.add("translate-x-72");
+        document.getElementById("exp_cat").innerHTML = cat;
+
+
 
     };
 
     const AddExpense = () => {
         const name = document.getElementById("name").value;
         const amount = document.getElementById("amount").value;
-        const category = document.getElementById("category").value;
+        const category = document.getElementById("exp_cat").innerHTML
         const date = document.getElementById("date").value;
         const notes = document.getElementById("notes").value;
 
@@ -358,45 +376,6 @@ const PlannedExpenses = () => {
         // get id name value and set id option value category from localstorage same names
         const name = document.getElementById("name").value;
         const category = document.getElementById("category");
-        // set name to preview
-        document.getElementById("preview_name").innerHTML = name;
-        // change icon and category preview
-        switch (category.value) {
-            case "Housing":
-                document.getElementById("preview_category").innerHTML = "Housing";
-                document.getElementById("preview_category_icon").src = home;
-                break;
-            case "Food":
-                document.getElementById("preview_category").innerHTML = "Food";
-                document.getElementById("preview_category_icon").src = food;
-                break;
-            case "Saving":
-                document.getElementById("preview_category").innerHTML = "Saving";
-                document.getElementById("preview_category_icon").src = saving;
-                break;
-            case "Transport":
-                document.getElementById("preview_category").innerHTML = "Transport";
-                document.getElementById("preview_category_icon").src = tansport;
-                break;
-            case "Clothing":
-                document.getElementById("preview_category").innerHTML = "Clothing";
-                document.getElementById("preview_category_icon").src = clothing;
-                break;
-            case "Health":
-                document.getElementById("preview_category").innerHTML = "Health";
-                document.getElementById("preview_category_icon").src = health;
-                break;
-            case "Entertainment":
-                document.getElementById("preview_category").innerHTML = "Entertainment";
-                document.getElementById("preview_category_icon").src = entertainment;
-                break;
-            case "Other":
-                document.getElementById("preview_category").innerHTML = "Other";
-                document.getElementById("preview_category_icon").src = other;
-                break;
-        }
- 
-
         // find this name in localstorage
 
         const categories = JSON.parse(localStorage.getItem("expenses"));
@@ -463,7 +442,29 @@ const PlannedExpenses = () => {
     updateTarget();
 
     return (
+        <>
+            <div id="bg_particles" className="area">
+                <ul className="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+
+        <Header
+            notificationsOPCL = {opencloseModalNotifications}
+            notifications={document.getElementById("modal_notifications")}
+        />
         <div id="top" className="overflow-y-hidden pt-24 bg-[#1a1a1a] bg-opacity-0">
+
+
             <div id="top"></div>
 
             {/* `preloader` */}
@@ -487,11 +488,39 @@ const PlannedExpenses = () => {
                 }
             </div>
 
+            {/* Modal window notifications */}
+            <div id="modal_notifications" className="duration-500 bg-opacity-0
+             -translate-y-[96rem] fixed top-0 left-0 bg-[#1D1D1D] bg-opacity-50 backdrop-blur-md z-50 mt-20 w-2/2 mx-5 p-10 rounded-md flex justify-center items-center
+           ">
+                <div className="flex items-center flex-col ">
+                    <p className="text-white text-center text-2xl font-bold mt-2 flex">
+                        <img src={bell} alt="" className="w-7 mr-1 self-center inline-block" />
+                        Notifications</p>
+                    <div className="text-center mt-5 flex flex-col">
+                        {/*<p className="text-white text-center text-sm font-bold mt-2">You have no notifications</p>*/}
+                       <h1 className="text-md text-white">Update 0.1.2</h1>
+                        <ul className="text-xs text-gray-400 text-left">
+                            <li>- ADDED PLN CURRENCY</li>
+                            <li>- REMOVED FILTER FOR YESTERDAY</li>
+                            <li>- ADDED DATES FOR EARLIER EXPENSES</li>
+                            <li>- ADDED PARTICLES BACKGROUND</li>
+                            <li>- NEW ADDING EXPENSE MENU</li>
+                            <li>- WHEN EXPENSES > 70% COLOR RED</li>
+                            <li>- ADDED NOTIFICATIONS CENTER</li>
+                            <li>- BUG FIXED WHEN ADDING MORE THAN 1 EXPENSE IT WASN'T ADDED</li>
+                            <li>- FIXED 13 SMALL BUGS</li>
+                            <li>- TEMPORARY REMOVED A TARGET MODULE</li>
+                        </ul>
+                        <p className="text-xs text-gray-300 text-right">24.06.2023</p>
+                    </div>
+                </div>
+            </div>
+
             {/* Modal window register */}
             {
                 localStorage.getItem("user")
                 === null ?
-                    (<div id="reg" className="hidden fixed top-0 left-0 bg-[#1D1D1D] bg-opacity-50 backdrop-blur-md z-50 w-full h-screen flex justify-center items-center ">
+                    (<div id="reg" className="hidden fixed top-0 left-0 bg-[#1D1D1D] bg-opacity-50 backdrop-blur-md z-[999999] w-full h-screen flex justify-center items-center ">
                         <div className="flex items-center flex-col ">
                             <img width={200} src={logo} alt="" />
                             <p className="text-white text-center text-2xl font-bold mt-2">Register</p>
@@ -522,7 +551,7 @@ const PlannedExpenses = () => {
             {
                 localStorage.getItem("user") ? (<> </>) :
                     (
-                        <div id="login" className="fixed top-0 left-0 bg-[#1D1D1D] bg-opacity-50 backdrop-blur-md z-50 w-full h-screen flex justify-center items-center ">
+                        <div id="login" className="fixed top-0 left-0 bg-[#1D1D1D] bg-opacity-50 backdrop-blur-md z-[999999] w-full h-screen flex justify-center items-center ">
                             <div className="flex items-center flex-col ">
                                 <img width={200} src={logo} alt="" />
                                 <p className="text-white text-center text-2xl font-bold mt-2">Login</p>
@@ -567,7 +596,7 @@ const PlannedExpenses = () => {
 
 
             {/* Top panel */}
-            <div id="top" className="fixed w-full md:w-3/3 md:m-auto bg-[#1a1a1a] bg-opacity-0 md:static">
+            <div id="top" className="fixed w-full sm:w-3/3 sm:m-auto bg-[#1a1a1a] bg-opacity-0 sm:static">
                 {/* Expenses and chart */}
                 {/*form chat gpt*/}
 
@@ -577,25 +606,90 @@ const PlannedExpenses = () => {
                     openmodalbudget={openModalBudget}
                 />
                 {/* Cards with expenses */}
-                <div className="flex items-center md:justify-center px-5 overflow-x-scroll md:overflow-x-hidden pt-10 pb-5 md:flex-wrap m-auto ">
-                    {/* Add Category button*/}
-                    <div onClick={openModal} className="py-5 shrink-0 
-                        bg-gradient-to-t bg-black bg-opacity-20 backdrop-blur-md
-                       self-stretch w-14 rounded-2xl flex justify-center items-center text-white text-4xl active:bg-white
-                       hover:bg-opacity-50 duration-300 cursor-pointer mt-5
-                       
-                       ">
-                        <img src={x} alt="x_icon" className="w-7 h-7 rotate-45 " />
-                    </div>
-                    {/* Target */}
-                    <Target
-                        state={state}
-                    />
-                    {/* Categories */}
+                <div className="relative flex items-center sm:justify-center overflow-x-scroll sm:overflow-x-hidden pt-10 pb-5 sm:flex-wrap m-auto ">
                     <Categories
                         state={state}
+                        modalopen={openModal}
                     />
+                    {/* Add Category button*/}
+
+
+
                 </div>
+            </div>
+
+            <div className="z-50 bg-white">
+                <div onClick={
+                    () => {
+                        document.getElementById("category_selector").classList.toggle("opacity-0");
+                        document.getElementById("img_add").classList.toggle("rotate-45");
+                        document.getElementById("category_selector").classList.toggle("translate-x-72");
+                    }
+                } className="py-5 shrink-0
+                        bg-gradient-to-t
+                       self-stretch w-14 h-14 flex justify-center items-center text-white text-4xl
+                       duration-300 cursor-pointer fixed bottom-0 right-0 mb-20 mr-5 z-50 rounded-full
+                       bg-[#4e54c8]
+                       ">
+                    <img id="img_add" src={x} alt="x_icon" className="w-7 h-7 rotate-45 duration-300" />
+
+                </div>
+
+                <div id="category_selector" className="flex p-5 z-50 fixed bottom-0 translate-x-72 right-0 mb-20 mr-24 opacity-0 duration-300 bg-[#4e54c8] p-2 rounded-xl">
+                   <div>
+                       <div onClick={
+                            () => {
+                                openModal("Housing");
+                            }
+                       } className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 "><img src={home} alt="home"/></div>
+                       <div  onClick={
+                           () => {
+                               openModal("Food");
+                           }
+                       } className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 my-2 +"><img src={food} alt="home"/></div>
+                       <div onClick={
+                           () => {
+                               openModal("Saving");
+                           }}
+                           className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 "><img src={saving} alt="ent"/> </div>
+                   </div>
+
+                    <div className="ml-5">
+                        <div onClick={
+                            () => {
+                                openModal("Transport");
+                            }} className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 "><img src={tansport} alt="home"/></div>
+                        <div onClick={
+                            () => {
+                                openModal("Clothing");
+                            }} className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 my-2 +"><img src={clothing} alt="home"/></div>
+                        <div onClick={
+                            () => {
+                                openModal("Health");
+                            }} className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 "><img src={health} alt="ent"/> </div>
+                    </div>
+
+                    <div className="ml-5">
+                        <div onClick={
+                            () => {
+                                openModal("Entertainment");
+                            }} className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 "><img src={entertainment} alt="home"/></div>
+                        <div onClick={
+                            () => {
+                                openModal("Other");
+                            }} className=" bg-black bg-opacity-30 backdrop-blur-md rounded-full p-2
+                        cursor-pointer hover:bg-opacity-50 duration-300 my-2 +"><img src={other} alt="home"/></div>
+                    </div>
+
+                </div>
+
             </div>
             {/* Spendings */}
             <Spendings
@@ -603,6 +697,7 @@ const PlannedExpenses = () => {
                 expenses={expenses}
             />
         </div>
+        </>
     );
 }
 

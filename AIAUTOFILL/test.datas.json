@@ -1,0 +1,154 @@
+[{
+  "_id": {
+    "$oid": "648e06bca8800a3c3cba56aa"
+  },
+  "user": "ovladaettt",
+  "name": "Zara",
+  "amount": 100,
+  "category": "Clothing",
+  "date": {
+    "$date": "2023-06-16T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e1a3acccf97dc94e096bd"
+  },
+  "user": "ovladaettt",
+  "name": "ATB",
+  "amount": 53,
+  "category": "Food",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e1b17cccf97dc94e096c7"
+  },
+  "user": "ovladaettt",
+  "name": "Zara",
+  "amount": 132,
+  "category": "Clothing",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "T-Shirt",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23cccccf97dc94e096cf"
+  },
+  "user": "ovladaettt",
+  "name": "Biedronka",
+  "amount": 32,
+  "category": "Food",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23cecccf97dc94e096d1"
+  },
+  "user": "ovladaettt",
+  "name": "Biedronka",
+  "amount": 32,
+  "category": "Food",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23d1cccf97dc94e096d3"
+  },
+  "user": "ovladaettt",
+  "name": "Biedronka",
+  "amount": 32,
+  "category": "Housing",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23dacccf97dc94e096d5"
+  },
+  "user": "ovladaettt",
+  "name": "Zara ",
+  "amount": 32,
+  "category": "Clothing",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23dccccf97dc94e096d7"
+  },
+  "user": "ovladaettt",
+  "name": "Zara ",
+  "amount": 32,
+  "category": "Clothing",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23e1cccf97dc94e096d9"
+  },
+  "user": "ovladaettt",
+  "name": "Bolt",
+  "amount": 32,
+  "category": "Transport",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23e2cccf97dc94e096db"
+  },
+  "user": "ovladaettt",
+  "name": "Bolt",
+  "amount": 32,
+  "category": "Transport",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648e23e6cccf97dc94e096dd"
+  },
+  "user": "ovladaettt",
+  "name": "Bolt",
+  "amount": 32,
+  "category": "Health",
+  "date": {
+    "$date": "2023-06-17T00:00:00.000Z"
+  },
+  "notes": "",
+  "__v": 0
+}]

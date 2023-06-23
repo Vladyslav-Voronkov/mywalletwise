@@ -25,7 +25,7 @@ const Target = ({
                                 state.targetName === "" ? "No target" : state.targetName
                             }</h1>
                             <h1 className="mt-2 text-xl text-green-300 font-bold">{
-                                state.targetName === "" ? "No target" : state.targetAmount
+                                state.targetName === "" ? "No target" : state.targetAmount + " PLN"
                             }</h1>
                             {/* When i can buy it date*/}
                             <div className="mt-2 w-max bg-[#ffffff55] rounded-full px-3 py-1 flex items-center">
