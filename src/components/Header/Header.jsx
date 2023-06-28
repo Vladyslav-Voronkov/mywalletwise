@@ -250,20 +250,21 @@ const Header = ({
                     <h2 className="text-xs text-gray-400">{
                         getTime()
                     } {state.user}!</h2>
-                    <p className="text-sm flex items-center">
-                        {
-                        //     month
+                    <h1 className={"text-xs text-gray-400"}>Wallet Wise | beta2.0.1</h1>
+                    {/*<p className="text-sm flex items-center">*/}
+                    {/*    {*/}
+                    {/*    //     month*/}
 
-                            new Date().toLocaleString('eng', { month: 'long' })
-                        } {new Date().getDate()
-                        } {new Date().getFullYear()
-                        }
-                        <p className={"ml-1"}>
-                        {
-                            time
-                        }
-                        </p>
-                    </p>
+                    {/*        new Date().toLocaleString('eng', { month: 'long' })*/}
+                    {/*    } {new Date().getDate()*/}
+                    {/*    } {new Date().getFullYear()*/}
+                    {/*    }*/}
+                    {/*    <p className={"ml-1"}>*/}
+                    {/*    {*/}
+                    {/*        time*/}
+                    {/*    }*/}
+                    {/*    </p>*/}
+                    {/*</p>*/}
                 </div>
     {/*            <div onClick={*/}
     {/*                () => {*/}
@@ -291,8 +292,7 @@ const Header = ({
 
             {/* My Balance */}
             <div>
-                <div className="flex justify-between items-center  text-white border bborder-gray-500 backdrop-blur-md p-2 rounded-full
-                hover:scale-105 duration-300 cursor-pointer hover:bg-gray-500 hover:bg-opacity-10
+                <div className="flex items-center text-white border-b py-2
                 ">
                     <div className="w-3 h-3 mr-2 bg-green-500 rounded-full"></div>
                     <span
