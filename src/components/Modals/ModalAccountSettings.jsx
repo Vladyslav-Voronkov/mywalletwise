@@ -1,20 +1,25 @@
-import avatar_1_preview from "../img/avatar-1-preview.webp"
-import avatar_2_preview from "../img/avatar-2-preview.webp"
-import avatar_3_preview from "../img/avatar-3-preview.webp"
-import avatar_4_preview from "../img/avatar-4-preview.webp"
-import avatar_5_preview from "../img/avatar-5-preview.webp"
+import avatar_1_preview from "../../img/avatar-1-preview.webp"
+import avatar_2_preview from "../../img/avatar-2-preview.webp"
+import avatar_3_preview from "../../img/avatar-3-preview.webp"
+import avatar_4_preview from "../../img/avatar-4-preview.webp"
+import avatar_5_preview from "../../img/avatar-5-preview.webp"
+import x from "../../img/icons/x.svg"
+import users from "../../img/icons/users.svg"
+import sparkles from "../../img/icons/sparkles.svg"
 
 const ModalAccountSettings = ({
     state,
 }) => {
+
     return (
         <>
+
             <div
                 id="modal_ACCOUNT_SETTINGS"
                 className="duration-500 -translate-y-[96rem] z-50 fixed top-0 left-0 w-full h-full md:w-1/3 bg-opacity-50 flex justify-center items-center ">
                 <div className="bg-[#000] bg-opacity-50 rounded-2xl backdrop-blur-md mx-2 w-full h-2/2">
                     <div className="flex justify-between items-center px-5 py-3">
-                        <h1 className="text-2xl text-white">Account Settings</h1>
+                        <h1 className="text-2xl text-white mt-5">Account Settings</h1>
                         <button className="text-2xl text-white" onClick={() => {
                             document.getElementById("account_settings").style.display = "flex";
                             document.getElementById("avatar_selector").style.display = "none";
@@ -22,10 +27,13 @@ const ModalAccountSettings = ({
                             document.getElementById("modal_ACCOUNT_SETTINGS").style.opacity = "0";
                             document.getElementById("modal_ACCOUNT_SETTINGS").style.transition = "all 0.9s ease";
                             // document.getElementById("modal_ACCOUNT_SETTINGS").style.display = "none";
-                            // translate x 
-                        }}>X</button>
+                            // translate x
+                        }}>
+                            <img src={x} alt="x_icon" className="w-5 h-5 hover:scale-110 duration-300 hover:rotate-180" />
+                        </button>
 
                     </div>
+
                     <div id="account_settings" className="px-5 py-3 flex justify-between items-center w-full">
                         <div className="
                          flex flex-col justify-center items-center
@@ -54,7 +62,9 @@ const ModalAccountSettings = ({
                                             document.getElementById("account_settings").style.display = "none";
                                         }
                                     }
-                                    className="bg-gradient-to-t from-red-500 to-yellow-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl active:bg-white">🙋‍♂️</button>
+                                    className="bg-gradient-to-t from-red-500 to-yellow-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl active:bg-white">
+                                   <img src={users} alt="users_icon" className="w-5 h-5" />
+                                    ️</button>
                                 Avatar
                             </div>
                             <div className="text-white flex flex-col items-center ml-5">
@@ -66,7 +76,9 @@ const ModalAccountSettings = ({
                                             document.getElementById("bg_particles").style.display = "none";
                                         }
                                     }
-                                } className="bg-gradient-to-t from-green-500 to-blue-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl">🖌️</button>
+                                } className="bg-gradient-to-t from-green-500 to-blue-900 w-14 h-14 rounded-full flex justify-center items-center text-white text-4xl">
+                                    <img src={sparkles} alt="sparkles_icon" className="w-5 h-5" />
+                                </button>
                                 Particles
                             </div>
                         </div>

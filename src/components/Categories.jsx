@@ -15,23 +15,92 @@ import other from "../img/icons/other.svg";
 
 
 const Categories = (
-    { state, modalopen }
+    { state, modalopen, setcategory }
 ) => {
     return (
         <>
             {
                 Object.keys(state.expCategories).map((key) => (
                     <>
-                        <div className="mt-5 w-3/5 sm:w-1/6 self-stretch shrink-0 text-white text-center">
+                        <div className="snap-mandatory mt-5 w-full min-[1300px]:w-1/4 self-stretch shrink-0 text-white text-center">
+
                             <div onClick={
                                 () => {
-                                    modalopen(key);
+                                    setcategory(key);
                                 }
-                            }  className="shrink-0 bg-gradient-to-b bg-black  bg-opacity-30 backdrop-blur-md card drop-shadow-xl p-5 text-white rounded-3xl text-center hover:bg-opacity-50 duration-300 cursor-pointer ml-5">
-                                <div className="flex flex-col justify-between items-center ">
-                                    <h1 className=" text-4xl font-bold">{state.expCategories[key]} PLN</h1>
+                            }  className="shrink-0
+snap-mandatory
+                            bg-gradient-to-b bg-black  bg-opacity-30 backdrop-blur-md card drop-shadow-xl p-5 text-white rounded-3xl text-center hover:bg-opacity-50 duration-300 cursor-pointer mx-5">
+                                <div className="flex">
+                                    <h1 className="text-lg font-bold">
+                                        {key === "Housing" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={home} className="w-6 inline-block mr-2" />
+                                                <p>Housing</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Food" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={food} className="w-6 inline-block mr-2" />
+                                                <p>Food</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Saving" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={saving} className="w-6 inline-block mr-2" />
+                                                <p>Saving</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Transport" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={transport} className="w-6 inline-block mr-2" />
+                                                <p>Transport</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Clothing" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={clothing} className="w-6 inline-block mr-2" />
+                                                <p>Clothing</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Health" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={health} className="w-6 inline-block mr-2" />
+                                                <p>Health</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Entertainment" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={entertainment} className="w-6 inline-block mr-2" />
+                                                <p>Entertainment</p>
+                                            </div>
+                                        ) : ""}
+                                        {key === "Other" ? (
+                                            <div className="flex items-center justify-center">
+                                                <img src={other} className="w-6 inline-block mr-2" />
+                                                <p>Other</p>
+                                            </div>
+                                        ) : ""}
+                                    </h1>
+                                </div>
+                                <div className="flex  justify-between items-center ">
+
+                                    <h1 className="text-4xl font-bold mt-2 text-white
+                    hover:text-gray-400 transition duration-500 ease-in-out cursor-pointer flex items-center
+                    leading-none
+                    ">{
+                                        parseFloat(state.expCategories[key]).toFixed(2).split(".")[0]
+                                    }
+                                        <p className="text-lg ml-1 self-center leading-none text-gray-300">
+                                            {
+                                                parseFloat(state.expCategories[key]).toFixed(2).split(".")[1]
+
+                                            }
+                                            <p className="text-green-500">zł</p>
+                                        </p>
+                                    </h1>
                                     {/* <div className="mt-5 w-max  bg-[#ffffff55] rounded-full px-3 py-1">{(state.expCategories[key] / state.balance * 100).toFixed()}%</div> */}
-                                    <CircularProgressbar className="w-20 mt-2 text-white" value={
+                                    <CircularProgressbar className="w-20 text-white cursor-pointer" value={
                                         state.expCategories[key] / state.balance * 100 > 100 ? 100 : state.expCategories[key] / state.balance * 100
                                     } text={`${state.expCategories[key] / state.balance * 100 > 100 ? 100 : (state.expCategories[key] / state.balance * 100).toFixed()
                                         }%`}
@@ -59,58 +128,7 @@ const Categories = (
                                     />
                                 </div>
                             </div>
-                            <div className="mt-2">
-                                <h1 className="text-lg font-bold">
-                                    {key === "Housing" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={home} className="w-6 inline-block mr-2" />
-                                            <p>Housing</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Food" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={food} className="w-6 inline-block mr-2" />
-                                            <p>Food</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Saving" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={saving} className="w-6 inline-block mr-2" />
-                                            <p>Saving</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Transport" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={transport} className="w-6 inline-block mr-2" />
-                                            <p>Transport</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Clothing" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={clothing} className="w-6 inline-block mr-2" />
-                                            <p>Clothing</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Health" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={health} className="w-6 inline-block mr-2" />
-                                            <p>Health</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Entertainment" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={entertainment} className="w-6 inline-block mr-2" />
-                                            <p>Entertainment</p>
-                                        </div>
-                                    ) : ""}
-                                    {key === "Other" ? (
-                                        <div className="flex items-center justify-center">
-                                            <img src={other} className="w-6 inline-block mr-2" />
-                                            <p>Other</p>
-                                        </div>
-                                    ) : ""}
-                                </h1>
-                            </div>
+
                         </div>
                     </>
 

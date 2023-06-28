@@ -31,9 +31,27 @@ const Header = ({
         }
     };
 
+    // update time every second
+    const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+    setInterval(() => {
+        setTime(new Date().toLocaleTimeString());
+    } , 1000);
+
+
     loadAvatar();
 
-
+    // get time to say good day, good morning e.t.c
+    const getTime = () => {
+        const date = new Date();
+        const hours = date.getHours();
+        if (hours < 12) {
+            return "Good Morning";
+        } else if (hours < 18) {
+            return "Good Afternoon";
+        } else {
+            return "Good Evening";
+        }
+    }
 
     if(JSON.parse(localStorage.getItem("user"))){
         state.user = JSON.parse(localStorage.getItem("user")).username;
@@ -229,30 +247,45 @@ const Header = ({
                 }
                 {/* UserName and Mountly Budget */}
                 <div className="text-white ml-2">
-                    <h2 className="text-xs text-gray-400">Hi, {state.user}!</h2>
-                    <p><span className="text-gray-400">Wallet</span> Wise</p>
-                </div>
-                <div onClick={
-                    () => {
-                    //    close or open notification smooth animated
-                        if (notifications.style.transform === "translateY(0rem)") {
-                            notifications.style.transform = "translateY(-96rem)";
-                            notifications.style.transition = "all 0.5s ease";
+                    <h2 className="text-xs text-gray-400">{
+                        getTime()
+                    } {state.user}!</h2>
+                    <p className="text-sm flex items-center">
+                        {
+                        //     month
+
+                            new Date().toLocaleString('eng', { month: 'long' })
+                        } {new Date().getDate()
+                        } {new Date().getFullYear()
                         }
-                        else {
-                            notifications.style.transform = "translateY(0rem)";
-                            notifications.style.transition = "all 0.5s ease";
+                        <p className={"ml-1"}>
+                        {
+                            time
                         }
-                    } }
-                    className="ml-5 relative cursor-pointer">
-                    <img
-    src={bell}  className="w-6 h-6 cursor-pointer hover:scale-105 duration-300 relative" alt="bell" />
-                    <div className="
-                    w-3 h-3 bg-red-500 rounded-full absolute top-0 right-0 text-white flex justify-center items-center text-xs
-                    ">
-                        <h1>1 </h1>
-                    </div>
+                        </p>
+                    </p>
                 </div>
+    {/*            <div onClick={*/}
+    {/*                () => {*/}
+    {/*                //    close or open notification smooth animated*/}
+    {/*                    if (notifications.style.transform === "translateY(0rem)") {*/}
+    {/*                        notifications.style.transform = "translateY(-96rem)";*/}
+    {/*                        notifications.style.transition = "all 0.5s ease";*/}
+    {/*                    }*/}
+    {/*                    else {*/}
+    {/*                        notifications.style.transform = "translateY(0rem)";*/}
+    {/*                        notifications.style.transition = "all 0.5s ease";*/}
+    {/*                    }*/}
+    {/*                } }*/}
+    {/*                className="ml-5 relative cursor-pointer">*/}
+    {/*                <img*/}
+    {/*src={bell}  className="w-6 h-6 cursor-pointer hover:scale-105 duration-300 relative" alt="bell" />*/}
+    {/*                <div className="*/}
+    {/*                w-3 h-3 bg-red-500 rounded-full absolute top-0 right-0 text-white flex justify-center items-center text-xs*/}
+    {/*                ">*/}
+    {/*                    <h1>1 </h1>*/}
+    {/*                </div>*/}
+    {/*            </div>*/}
 
             </div>
 

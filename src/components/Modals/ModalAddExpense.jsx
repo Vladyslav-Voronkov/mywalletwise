@@ -1,18 +1,18 @@
 // Modal window to add an expense
 
 // Import icons
-import x from "../img/icons/x.svg";
+import x from "../../img/icons/x.svg";
 
 // Categories icons
-import home from "../img/icons/home.svg";
-import save from "../img/icons/save.svg";
-import food from "../img/icons/food.svg";
-import saving from "../img/icons/saving.svg";
-import tansport from "../img/icons/transport.svg";
-import clothing from "../img/icons/clothing.svg";
-import health from "../img/icons/health.svg";
-import entertainment from "../img/icons/entertainment.svg";
-import other from "../img/icons/other.svg";
+import home from "../../img/icons/home.svg";
+import save from "../../img/icons/save.svg";
+import food from "../../img/icons/food.svg";
+import saving from "../../img/icons/saving.svg";
+import tansport from "../../img/icons/transport.svg";
+import clothing from "../../img/icons/clothing.svg";
+import health from "../../img/icons/health.svg";
+import entertainment from "../../img/icons/entertainment.svg";
+import other from "../../img/icons/other.svg";
 
 // import use state
 import { useState } from "react";
@@ -70,13 +70,13 @@ const ModalAddExpense = ({
                             {cat_name} / Add Expense
                         </div>
                         {/* Close window */}
-                        <button className="text-2xl text-white" onClick={() => {
+                        <button className="text-2xl text-white " onClick={() => {
                             // document.getElementById("modal_ADD_EXPENSE").style.display = "none";
                             document.getElementById("modal_ADD_EXPENSE").style.transform = "translateX(-96rem)";
                             document.getElementById("modal_ADD_EXPENSE").style.opacity = "0";
                             document.getElementById("modal_ADD_EXPENSE").style.transition = "all 0.9s ease";
                         }}>
-                            <img src={x} alt="x_icon" className="w-5 h-5 hover:scale-110 duration-300 hover:rotate-180" />
+                            <img src={x} alt="x_icon" className="w-5 h-5 hover:scale-110 duration-300 cursor-none rounded-full hover:rotate-180 hover:bg-gray-500 bg-opacity-50" />
                         </button>
                     </div>
 
@@ -96,7 +96,7 @@ const ModalAddExpense = ({
                         <div className="flex justify-between items-center mt-5">
                             <label htmlFor="amount" className="text-white text-2xl mr-5">Amount:</label>
                             <input placeholder="Amount" id="amount" name="amount" className="w-full text-center text-2xl border border-gray-400 text-white rounded-md px-3 py-1 outline-none bg-transparent" type="number"
-                            pattern={"[0-9]*"}
+
                             />
                         </div>
                         <div className="flex justify-between items-center mt-5">

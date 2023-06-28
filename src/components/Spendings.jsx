@@ -9,6 +9,7 @@ import entertainment from "../img/icons/entertainment.svg";
 import other from "../img/icons/other.svg";
 
 import aos from 'aos';
+import 'aos/dist/aos.css';
 
 
 
@@ -18,45 +19,45 @@ const Icons = (
     return (
         <div className="flex justify-between items-center">
             {expense.category === "Housing" ? <div className="
-            bg-gradient-to-r from-red-500 to-yellow-500
-            rounded-full p-5
+            flex justify-center items-center
+            rounded-full
             ">
-                <img src={home} alt="home" />
+                <img src={home}  width={50} alt="home" />
             </div> : null}
             {expense.category === "Food" ? <div className="
-            bg-gradient-to-r from-yellow-500 to-green-500
-            rounded-full p-5">
-                <img src={food} alt="food" />
+            flex justify-center items-center
+            rounded-full">
+                <img src={food}  width={50} alt="food" />
             </div> : null}
             {expense.category === "Saving" ? <div className="
-            bg-gradient-to-r from-green-500 to-blue-500
-        rounded-full p-5">
-                <img src={saving} alt="saving" />
+            flex justify-center items-center
+        rounded-full">
+                <img src={saving}  width={50} alt="saving" />
             </div> : null}
             {expense.category === "Transport" ? <div className="
-            bg-gradient-to-r from-blue-500 to-purple-500
-            rounded-full p-5">
-                <img src={transport} alt="transport" />
+            flex justify-center items-center
+            rounded-full ">
+                <img src={transport}  width={50} alt="transport" />
             </div> : null}
             {expense.category === "Clothing" ? <div className="
-            bg-gradient-to-r from-purple-500 to-pink-500
-            rounded-full p-5">
-                <img src={clothing} alt="clothing" />
+           flex justify-center items-center
+            rounded-full ">
+                <img src={clothing}  width={50} alt="clothing" />
             </div> : null}
             {expense.category === "Health" ? <div className="
-            bg-gradient-to-r from-pink-500 to-indigo-500
-            rounded-full p-5">
-                <img src={health} alt="health" />
+            flex justify-center items-center
+            rounded-full ">
+                <img src={health} width={50} alt="health" />
             </div> : null}
             {expense.category === "Entertainment" ? <div className="
-            bg-gradient-to-r from-indigo-500 to-red-500
-            rounded-full p-5">
-                <img src={entertainment} alt="entertainment" />
+            flex justify-center items-center
+            rounded-full">
+                <img src={entertainment} width={50}  alt="entertainment" />
             </div> : null}
             {expense.category === "Other" ? <div className="
-            bg-gradient-to-r from-red-500 to-yellow-500
-            rounded-full p-5">
-                <img src={other} alt="other" />
+            flex justify-center items-center
+            rounded-full ">
+                <img src={other} width={50} alt="other" />
             </div> : null}
             <div className="ml-3">
                 <h1 className="text-white text-lg">{expense.name}</h1>
@@ -70,12 +71,99 @@ const Spendings = ({
     state, expenses
 }) => {
     aos.init();
+
+    const open = () => {
+        if(document.getElementById("spendingss").classList.contains("scale-[0]")){
+        document.getElementById("spendingss").classList.remove("blur-sm");
+        document.getElementById("spendingss").classList.remove("scale-[0]");
+        document.getElementById("expchart").classList.add("duration-700");
+        document.getElementById("expchart").classList.add("translate-y-[-15rem]");
+        document.getElementById("expchart").classList.add("scale-0");
+        document.getElementById("catan").classList.add("duration-700");
+        document.getElementById("catan").classList.add("translate-y-[-30rem]");
+        document.getElementById("catan").classList.add("scale-0");
+        document.getElementById("bar").classList.remove("mb-20");
+
+        document.getElementById("bar").classList.add("mb-56");
+        document.getElementById("bar").classList.remove("w-10");
+        document.getElementById("bar").classList.add("w-36");
+        document.getElementById("bar").classList.remove("h-[15px]");
+        document.getElementById("catcharts").classList.add("duration-700");
+        document.getElementById("catcharts").classList.add("translate-y-[-30rem]");
+        document.getElementById("catcharts").classList.add("scale-0");
+        } else {
+            document.getElementById("spendingss").classList.add("blur-sm");
+            document.getElementById("spendingss").classList.add("scale-[0]");
+                document.getElementById("expchart").classList.remove("translate-y-[-15rem]");
+                document.getElementById("expchart").classList.remove("scale-0");
+                document.getElementById("catan").classList.remove("translate-y-[-30rem]");
+                document.getElementById("catan").classList.remove("scale-0");
+            document.getElementById("bar").classList.add("mb-20");
+            document.getElementById("bar").classList.remove("mb-56");
+            document.getElementById("bar").classList.add("w-10");
+            document.getElementById("bar").classList.remove("w-36");
+            document.getElementById("catcharts").classList.remove("translate-y-[-30rem]");
+            document.getElementById("catcharts").classList.remove("scale-0");
+
+        }
+    }
+
+    window.addEventListener("scroll", () => {
+        if(window.scrollY > 0) {
+            document.getElementById("bar").classList.add("h-[15px]");
+
+        } else{
+            document.getElementById("bar").classList.remove("h-[15px]");
+        }
+        if (window.scrollY > 150) {
+            document.getElementById("spendingss").classList.remove("blur-sm");
+            document.getElementById("spendingss").classList.remove("scale-[0]");
+            document.getElementById("expchart").classList.add("duration-700");
+            document.getElementById("expchart").classList.add("translate-y-[-15rem]");
+            document.getElementById("expchart").classList.add("scale-0");
+            document.getElementById("catan").classList.add("duration-700");
+            document.getElementById("catan").classList.add("translate-y-[-30rem]");
+            document.getElementById("catan").classList.add("scale-0");
+            document.getElementById("bar").classList.remove("mb-20");
+
+            document.getElementById("bar").classList.add("mb-56");
+            document.getElementById("bar").classList.remove("w-10");
+            document.getElementById("bar").classList.add("w-36");
+            document.getElementById("bar").classList.remove("h-[15px]");
+            document.getElementById("catcharts").classList.add("duration-700");
+            document.getElementById("catcharts").classList.add("translate-y-[-30rem]");
+            document.getElementById("catcharts").classList.add("scale-0");
+
+        } else if(window.scrollY < 0) {
+            document.getElementById("spendingss").classList.add("blur-sm");
+            document.getElementById("spendingss").classList.add("scale-[0]");
+                document.getElementById("expchart").classList.remove("translate-y-[-15rem]");
+                document.getElementById("expchart").classList.remove("scale-0");
+                document.getElementById("catan").classList.remove("translate-y-[-30rem]");
+                document.getElementById("catan").classList.remove("scale-0");
+            document.getElementById("bar").classList.add("mb-20");
+            document.getElementById("bar").classList.remove("mb-56");
+            document.getElementById("bar").classList.add("w-10");
+            document.getElementById("bar").classList.remove("w-36");
+            document.getElementById("catcharts").classList.remove("translate-y-[-30rem]");
+            document.getElementById("catcharts").classList.remove("scale-0");
+
+
+        }
+        if(window.scrollY < 0){
+            window.scrollTo(0, -1);
+        }
+    } );
+
     return (
         <>
-            <div className="my-10 pb-20 md:mt-5 mt-[450px] pt-5 backdrop-blur-sm  w-full px-5 overflow-x-hidden bg-gray-800 bg-opacity-50 z-40 absolute
-             ">
-                <a href="#top"><div className="w-32 h-1 rounded-full mt-2 bg-white m-auto absolute left-0 top-0 ml-32 md:hidden"></div></a>
-                <div className="overflow-y-scroll md:overflow-y-hidden  overflow-x-hidden md:w-2/3 md:m-auto">
+            <div onClick={open} id="bar" className="
+            bg-white w-10 bg-opacity-50 h-[6px] rounded-full absolute left-1/2  transform -translate-x-1/2 bottom-0  mb-20
+            duration-500 hover:h-[20px]
+            "></div>
+            <div id="spendingss" className=" blur-sm min-[1300px]:mt-0 mt-[30rem] transition-all duration-700 pb-32
+            w-full  scale-[0] md:w-2/3 m-auto p-5 rounded-2xl bg-gray-800 bg-opacity-0 z-20 absolute overflow-x-hidden overflow-y-hidden">
+                <div className=" overflow-y-hidden md:overflow-y-hidden  overflow-x-hidden md:w-2/3 md:m-auto">
                     {/* Today expenses */}
                     <h1 className="text-white text-xl">Today</h1>
                     {/* sort by date "TODAY" */}
@@ -88,54 +176,57 @@ const Spendings = ({
                             return date.getDate() === today.getDate();
                         }
                         ).reverse().map((expense) => (
-                            <div data-aos="zoom-in-up"
-                                id={expense.id}
-                                className="flex justify-between items-center mt-4">
-                                <div
-                                    onClick={() => {
-                                        // delete expense
-                                        const expenses = JSON.parse(localStorage.getItem("expenses"));
-                                        // find this expense in expenses
-                                        expenses.map((expense) => {
-                                            if (expense.id === expense.id) {
-                                                // delete this expense
-                                                expenses.splice(expense.id, 1);
-                                                // save to local storage
-                                                localStorage.setItem("expenses", JSON.stringify(expenses));
-                                                window.location.reload();
-                                            }
-                                        })
-                                    }}
-
-                                    id={
-                                        "delete_" + expense.id
+                           <>
+                               <div data-aos="zoom-in-up"
+                                    id={expense._id}
+                                    onClick={
+                                        () => {
+                                            document.getElementById("notes_" + expense._id).classList.toggle("hidden");
+                                            document.getElementById("notes_" + expense._id).classList.toggle("opacity-100");
+                                            document.getElementById("notes_" + expense._id).classList.toggle("duration-500");
+                                        }
                                     }
-                                    className="absolute hidden bg-red-500 rounded-full p-2 ml-10 mb-10 justify-center items-center text-white text-sm active:bg-white">🗑️</div>
-                                <Icons expense={expense} />
-                                <div>
-                                    <h1 className="text-white text-xl text-right">- {parseFloat(expense.amount)} PLN</h1>
-                                </div>
-                            </div>
+                                    className="flex justify-between items-center mt-4 bg-gray-700 bg-opacity-50 backdrop-blur-md p-4 rounded-3xl">
+                                   <Icons expense={expense} />
+                                   <div>
+                                       <h1 id={
+                                           "name_" + expense._id
+                                       } className="text-white text-xl text-right">- {parseFloat(expense.amount)} PLN</h1>
+                                   </div>
+
+                                   <div id={
+                                       "delete_" + expense._id
+                                   } className="
+                                bg-red-500 p-2 ml-2 rounded-2xl text-white opacity-0 w-20 hidden duration-500 flex justify-center items-center
+                                ">
+                                       <h1>Delete</h1>
+                                   </div>
+                               </div>
+                               <div>
+                                   {/*expense notes*/}
+                                   {
+                                       expense.notes ? (
+                                           <div id={
+                                               "notes_" + expense._id
+                                           } data-aos="zoom-in-up" className="mb-10 hidden bg-gray-700 bg-opacity-50 backdrop-blur-md p-4 rounded-3xl mt-2">
+                                               <h1 className="text-white text-xl text-right">Note</h1>
+                                               <h1 className="text-gray-400 text-sm text-right">{expense.notes}</h1>
+                                           </div>
+                                       ) : (
+                                           <>
+                                               <div id={
+                                                   "notes_" + expense._id
+                                               } data-aos="zoom-in-up" className="mb-10 hidden bg-gray-700 bg-opacity-50 backdrop-blur-md p-4 rounded-3xl mt-2">
+                                                   <h1 className="text-white text-xl text-right">No notes</h1>
+
+                                               </div></>
+                                       )
+                                   }
+                               </div>
+                           </>
                         ))
                     }
-                    {/* yesterday expenses */}
-                    {/*<h1 className="text-white text-xl mt-10">Yesterday</h1>*/}
-                    {/* sort by date "YESTERDAY" */}
-                    {/*{*/}
-                    {/*    expenses.filter((expense) => {*/}
-                    {/*        const today = new Date();*/}
-                    {/*        const date = new Date(expense.date);*/}
-                    {/*        return date.getDate() === today.getDate() - 1;*/}
-                    {/*    }*/}
-                    {/*    ).map((expense) => (*/}
-                    {/*        <div className="flex justify-between items-center mt-4" >*/}
-                    {/*            <Icons expense={expense} />*/}
-                    {/*            <div>*/}
-                    {/*                <h1 className="text-white text-xl text-right">- {expense.amount}</h1>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    ))*/}
-                    {/*}*/}
+
                     {/* earlier */}
                     <h1 className="text-white text-xl mt-10">Earlier</h1>
                     {/* sort by date "EARLIER" */}
@@ -146,19 +237,59 @@ const Spendings = ({
                             return date.getDate() < today.getDate();
                         }
                         ).map((expense) => (
-                            <div data-aos="zoom-in-up" className="flex justify-between items-center mt-4">
-                                <Icons expense={expense} />
-                                <div>
-                                    <h1 className="text-white text-xl text-right">- {parseFloat(expense.amount)} PLN</h1>
-                                    <h1 className="text-gray-400 text-sm text-right">{
-                                    //     date of expense
-                                    new Date(expense.date).getDate() + "." +
-                                    new Date(expense.date).getMonth() + "." +
-                                    new Date(expense.date).getFullYear()
-                                    }</h1>
-                                </div>
+                          <>
+                              <div
+                                  onClick={
+                                      () => {
+                                          document.getElementById("notes_" + expense._id).classList.toggle("hidden");
+                                          document.getElementById("notes_" + expense._id).classList.toggle("opacity-100");
+                                          document.getElementById("notes_" + expense._id).classList.toggle("duration-500");
+                                      }
+                                  }
+                                  data-aos="zoom-in-up" className="flex justify-between items-center mt-4 bg-gray-700 bg-opacity-50 backdrop-blur-md p-4 rounded-3xl">
+                                  <Icons expense={expense} />
+                                  <div id={
+                                      "name_" + expense._id
+                                  }>
+                                      <h1 className="text-white text-xl text-right">- {parseFloat(expense.amount)} PLN</h1>
+                                      <h1 className="text-gray-400 text-sm text-right">{
+                                          //     date of expense
+                                          new Date(expense.date).getDate() + "." +
+                                          new Date(expense.date).getMonth() + "." +
+                                          new Date(expense.date).getFullYear()
+                                      }</h1>
+                                  </div>
+                                  <div id={
+                                      "delete_" + expense._id
+                                  } className="
+                                bg-red-500 p-2 ml-2 rounded-2xl text-white opacity-0 w-20 hidden duration-500 flex justify-center items-center
+                                ">
+                                      <h1>Delete</h1>
+                                  </div>
 
+                              </div>
+                            <div>
+                                {/*expense notes*/}
+                                {
+                                    expense.notes ? (
+                                        <div id={
+                                            "notes_" + expense._id
+                                        } data-aos="zoom-in-up" className="mb-10 hidden bg-gray-700 bg-opacity-50 backdrop-blur-md p-4 rounded-3xl mt-2">
+                                            <h1 className="text-white text-xl text-right">Note</h1>
+                                            <h1 className="text-gray-400 text-sm text-right">{expense.notes}</h1>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div id={
+                                                "notes_" + expense._id
+                                            } data-aos="zoom-in-up" className="mb-10 hidden bg-gray-700 bg-opacity-50 backdrop-blur-md p-4 rounded-3xl mt-2">
+                                                <h1 className="text-white text-xl text-right">No notes</h1>
+
+                                            </div></>
+                                    )
+                                }
                             </div>
+                          </>
                         ))
                     }
 

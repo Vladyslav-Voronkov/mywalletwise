@@ -1,6 +1,6 @@
-import x_icon from "../img/icons/x.svg"
-import pencil_alt from "../img/icons/pencil-alt.svg"
-import check from "../img/icons/check.svg"
+import x_icon from "../../img/icons/x.svg"
+import pencil_alt from "../../img/icons/pencil-alt.svg"
+import check from "../../img/icons/check.svg"
 
 // Modal window to add/edit a target
 

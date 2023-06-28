@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header/Header';
-import PlannedExpenses from './components/PlannedExpenses';
+import Dashboard from './Dashboard';
 
 
 function App() {
   return (
     <>
 
-      <PlannedExpenses />
+      <Dashboard />
     </>
   );
 }

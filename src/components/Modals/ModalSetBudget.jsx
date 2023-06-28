@@ -1,7 +1,7 @@
-import x from "../img/icons/x.svg";
-import beaker from "../img/icons/beaker.svg";
-import starsai from "../img/icons/starsai.svg";
-import check from "../img/icons/check.svg";
+import x from "../../img/icons/x.svg";
+import beaker from "../../img/icons/beaker.svg";
+import starsai from "../../img/icons/starsai.svg";
+import check from "../../img/icons/check.svg";
 const ModalSetBudget = ({
     state,
 
